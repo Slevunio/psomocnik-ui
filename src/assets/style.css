@@ -1,0 +1,38 @@
+.bg-psomocnik, .btn-psomocnik{
+background-color: #3ed4c2;
+}
+.btn-psomocnik:hover{
+cursor: pointer;
+background-color:#343a40;
+color:white;
+}
+.btn-psomocnik:focus{
+background-color:#1e2226;
+color:white;
+margin-top:2px;
+}
+.btn-psomocnik.active,.btn-psomocnik:active{
+background-color:#1e2226;
+color:white;
+margin-top:2px;
+}
+.carousel-item .img-fluid{
+width:100%;
+height:100%;
+}
+[type='radio']{
+display:none;
+}
+.navbar-dark .navbar-nav .nav-link:hover{
+    background-color: #3ed4c2;
+}
+.navbar .dropdown-menu{
+    background: #343a40;
+}
+.navbar .dropdown-menu .dropdown-item {
+    color: rgba(255, 255, 255, 0.5);
+}
+.navbar .dropdown-menu .dropdown-item:hover {
+    color: white;
+    background-color: #3ed4c2;
+}
