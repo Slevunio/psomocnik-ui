@@ -1,9 +1,10 @@
 runtime: nodejs10
-api_version: 1
 handlers:
-- url: /(.*\.(js|css|png|jpg|ico))$
- static_files: dist/
- upload: dist/.*\.(js|css|png|jpg)$
-- url: /.*
- static_files: dist/index.html
- upload: dist/index.html
+ # Serve all static files with urls ending with a file extension
+ - url: /(.*\..+)$
+   static_files: dist/\1
+   upload: dist/(.*\..+)$
+  # catch all handler to index.html
+ - url: /.*
+   static_files: dist/index.html
+   upload: dist/index.html
