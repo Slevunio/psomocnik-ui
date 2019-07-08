@@ -1,0 +1,9 @@
+runtime: nodejs10
+api_version: 1
+handlers:
+- url: /(.*\.(js|css|png|jpg|ico))$
+ static_files: dist/
+ upload: dist/.*\.(js|css|png|jpg)$
+- url: /.*
+ static_files: dist/index.html
+ upload: dist/index.html
