@@ -1,10 +1,10 @@
 runtime: nodejs10
 handlers:
-  # Serve all static files with urls ending with a file extension
-- url: /(.*\..+)$ 
-  static_files: target/dist/\1
-  upload: target/dist/(.*\..+)$
+ # Serve all static files with urls ending with a file extension
+ - url: /(.*\..+)$
+   static_files: target/dist/\1
+   upload: target/dist/(.*\..+)$
   # catch all handler to index.html
-- url: /.*
-  static_files: target/dist/index.html
-  upload: target/dist/index.html
+ - url: /.*
+   static_files: target/dist/index.html
+   upload: target/dist/index.html
