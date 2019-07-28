@@ -50,7 +50,8 @@
                 <td id="canLiveWithOtherCats">{{pet.canLiveWithOtherCats}}</td>
                 <td id="canLiveWithKids">{{pet.canLiveWithKids}}</td>
                 <td id="activity">{{pet.activity}}</td>
-                <td id="diseases">{{pet.diseases}}</td>
+                <td><span v-for="(disease, index) in pet.diseases"><span id="diseases">{{disease.name}}</span><span
+                        v-if="index!==pet.diseases.length-1">, </span></span></td>
             </tr>
             <tr class="text-center">
                 <td>
@@ -167,39 +168,39 @@
                 }
             }
         },
-        mounted(){
+        mounted() {
             this.getPet();
         },
-        beforeUpdate(){
+        beforeUpdate() {
             this.formatDate();
         },
-        methods:{
-            getPet(){
-                api.readPet(this.getPetId()).then(response=>{
-                    this.pet=response.data;
+        methods: {
+            getPet() {
+                api.readPet(this.getPetId()).then(response => {
+                    this.pet = response.data;
                 });
             },
-            formatDate(){
-                var splitted=this.pet.takeInDate.split('T');
-                this.formattedDate=splitted[0]+' '+splitted[1];
+            formatDate() {
+                var splitted = this.pet.takeInDate.split('T');
+                this.formattedDate = splitted[0] + ' ' + splitted[1];
             },
-            getPetId(){
+            getPetId() {
                 var splitted = window.location.href.split('/');
-                return splitted[splitted.length-1];
+                return splitted[splitted.length - 1];
             },
-            setElementId(id){
-                this.elementId=id;
+            setElementId(id) {
+                this.elementId = id;
                 this.setDefaultInputValue();
             },
-            setDefaultInputValue(){
-                document.getElementById("editInput").value=document.getElementById(this.elementId).innerHTML;
+            setDefaultInputValue() {
+                document.getElementById("editInput").value = document.getElementById(this.elementId).innerHTML;
             },
-            editValue(){
-                var newValue=document.getElementById("editInput").value;
-                document.getElementById(this.elementId).innerHTML=newValue;
-                this.updatedPet[this.elementId]=newValue;
+            editValue() {
+                var newValue = document.getElementById("editInput").value;
+                document.getElementById(this.elementId).innerHTML = newValue;
+                this.updatedPet[this.elementId] = newValue;
             },
-            editPet(){
+            editPet() {
                 api.updatePet(this.getPetId(), this.updatedPet).then(
                     document.location.replace("/managePets")
                 );

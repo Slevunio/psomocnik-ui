@@ -10,34 +10,51 @@
                             placeholder="Wprowadź imię zwierzęcia"></input-text>
                 <input-text type="datetime-local" name="takeInDate" label="Data przyjęcia" v-model="pet.takeInDate"
                             placeholder="yyyy-mm-dd --:--"></input-text>
-                <add-pet-input-radio label="Gatunek" name="species" :values="['Pies', 'Kot']" v-model="pet.species"></add-pet-input-radio>
+                <add-pet-input-radio label="Gatunek" name="species" :values="['Pies', 'Kot']"
+                                     v-model="pet.species"></add-pet-input-radio>
 
-                <add-pet-input-radio label="Płeć" name="sex" :values="['Męska', 'Żeńska']" v-model="pet.sex"></add-pet-input-radio>
+                <add-pet-input-radio label="Płeć" name="sex" :values="['Męska', 'Żeńska']"
+                                     v-model="pet.sex"></add-pet-input-radio>
                 <input-text type="number" label="Wiek" name="age" placeholder="Wprowadź wiek zwierzęcia"
                             v-model="pet.age"></input-text>
                 <add-pet-input-radio label="Czy może mieszkać z innymi psami" name="canLiveWithOtherDogs"
-                             :values="['Tak', 'Nie']" v-model="pet.canLiveWithOtherDogs"></add-pet-input-radio>
+                                     :values="['Tak', 'Nie']" v-model="pet.canLiveWithOtherDogs"></add-pet-input-radio>
                 <add-pet-input-radio label="Czy może mieszkać z innymi Kotami" name="canLiveWithOtherCats"
-                             :values="['Tak', 'Nie']" v-model="pet.canLiveWithOtherCats"></add-pet-input-radio>
+                                     :values="['Tak', 'Nie']" v-model="pet.canLiveWithOtherCats"></add-pet-input-radio>
                 <add-pet-input-radio label="Czy może mieszkać z dziećmi" name="canLiveWithKids" :values="['Tak', 'Nie']"
-                             v-model="pet.canLiveWithKids"></add-pet-input-radio>
+                                     v-model="pet.canLiveWithKids"></add-pet-input-radio>
                 <input-text type="number" label="Aktywność w skali 1-10 (1 - nieaktywny, 10 - bardzo aktywny)"
                             name="activity" placeholder="Aktywność" v-model="pet.activity"></input-text>
                 <h5>Choroby</h5>
-                <div id="petDiseases" v-for="disease in diseasesArray">
-                    <input-text type="text" placeholder="Wprowadź chorobę" v-model="disease.value"></input-text>
+                <div class="dropdown">
+                    <button class="btn btn-psomocnik dropdown-toggle" data-toggle="dropdown">Wybierz chorobę</button>
+                    <ul class="dropdown-menu">
+                        <li v-for="disease in diseases" @click="addDisease(disease)"><a href="javascript:void(0)">{{disease.name}}</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col">
-                    <button type="button" id="addDisButton" class="btn btn-psomocnik btn-lg" v-on:click="addDis()">Dodaj
-                        chorobę
-                    </button>
+                <table class="table">
+                    <tr v-for="disease in pet.diseases">
+                        <td>{{disease.name}}</td>
+                        <td>
+                            <button type="button" class="btn btn-psomocnik" @click="deleteDisease(disease)">Usuń
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <div class="large-12 medium-12 small-12 cell">
+                    <label>Zdjęcia
+                        <input type="file" id="photos" ref="photos" multiple @change="handlePhotosUpload()"/>
+                    </label>
+                </div>
+                <div class="large-12 medium-12 small-12 cell">
+                    <div v-for="(photo, key) in photos" class="file-listing">{{ photo.name }} <span class="remove-file"
+                                                                                                    @click="removePhoto( key )">Usuń</span>
+                    </div>
                 </div>
                 <br>
-                <!--<div class="form-group">
-                    <label for="images" class="btn btn-psomocnik btn-lg">Dodaj zdjęcie</label>
-                    <input type="file" class="form-control-file" id="images">
-                </div>
-                -->
+                <br>
                 <div class="row">
                     <div class="col text-center">
                         <button type="submit" class="btn btn-lg btn-psomocnik">Wyślij</button>
@@ -72,28 +89,56 @@
                     canLiveWithOtherCats: '',
                     canLiveWithKids: '',
                     activity: '',
-                    diseases: ''
+                    diseases: []
                 },
-                //buffor for diseases -> will be converted to diseasesString
-                diseasesArray: []
+                diseases: [],
+                photos: []
             }
         },
+
+        mounted() {
+            this.readDiseases();
+        },
         methods: {
-            addDis() {
-                this.diseasesArray.push({value: ''});
+            addDisease(disease) {
+                this.pet.diseases.push(disease);
             },
-            diseasesToString() {
-                for (var i = 0; i < this.diseasesArray.length; i++) {
-                    if (i !== this.diseasesArray.length - 1) {
-                        this.pet.diseases += this.diseasesArray[i].value + ", ";
-                    } else
-                        this.pet.diseases += this.diseasesArray[i].value;
+            deleteDisease(disease) {
+                for (var i = 0; i < this.pet.diseases.length; i++) {
+                    if (this.pet.diseases[i] === disease) {
+                        this.pet.diseases.splice(i, 1);
+                    }
                 }
             },
-            createPet() {
+            readDiseases() {
+                api.readDiseases().then(response => {
+                    this.diseases = response.data;
+                });
+            },
+            handlePhotosUpload() {
+                let uploadedPhotos = this.$refs.photos.files;
+                for (var i = 0; i < uploadedPhotos.length; i++) {
+                    this.photos.push(uploadedPhotos[i]);
+                }
+            },
 
-                this.diseasesToString();
-                api.createPet(this.pet).then(
+            removePhoto(key) {
+                this.photos.splice(key, 1);
+            },
+            createPet() {
+                let formData = new FormData();
+                for (var item in this.pet) {
+                    if (item === 'diseases') {
+                        formData.append(item, JSON.stringify(this.pet[item]));
+                    } else {
+                        formData.append(item, this.pet[item]);
+                    }
+                }
+
+                for (var i = 0; i < this.photos.length; i++) {
+                    formData.append(this.photos[i].name, this.photos[i]);
+                }
+                api.createPet(formData).then(
                     document.location.replace("/managePets")
                 );
             }

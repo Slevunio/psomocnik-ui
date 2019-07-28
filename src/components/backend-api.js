@@ -1,71 +1,84 @@
 import axios from 'axios'
 
 const AXIOS = axios.create({
-  baseURL: `/api`
+    baseURL: `/api`
 });
 
 
 export default {
 
-    createUser(user){
-      return AXIOS.post('/user',{username:user.username, email:user.email, role:user.role});
+    createUser(user) {
+        return AXIOS.post('/user', {username: user.username, email: user.email, role: user.role});
     },
-    registerUser(user){
-      return AXIOS.post('/user',{
-          username:user.username,
-          email:user.email,
-          password:user.password,
-          role:user.role
-      })
+    registerUser(user) {
+        return AXIOS.post('/user', {
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            role: user.role
+        })
     },
     readUsers() {
         return AXIOS.get('/user');
     },
 
-    readUser(userId){
-        return AXIOS.get('/user/'+userId);
+    readUser(userId) {
+        return AXIOS.get('/user/' + userId);
     },
 
-    updateUser(userId, user){
-        return AXIOS.put('/user/'+userId, {username:user.username, email:user.email, role:user.role});
+    updateUser(userId, user) {
+        return AXIOS.put('/user/' + userId, {username: user.username, email: user.email, role: user.role});
     },
 
-    deleteUser(userId){
-        return AXIOS.delete('/user/'+userId);
+    deleteUser(userId) {
+        return AXIOS.delete('/user/' + userId);
     },
 
-    createPet(pet){
-      return AXIOS.post('/pet',{name: pet.name,
-          takeInDate: pet.takeInDate,
-          species: pet.species,
-          sex: pet.sex,
-          age: pet.age,
-          canLiveWithOtherDogs: pet.canLiveWithOtherDogs,
-          canLiveWithOtherCats: pet.canLiveWithOtherCats,
-          canLiveWithKids: pet.canLiveWithKids,
-          activity: pet.activity,
-          diseases: pet.diseases});
+    createPet(formData) {
+        return AXIOS.post('/pet',
+            formData
+            ,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+
+            }
+        );
     },
 
-    readPets(){
+    readPets() {
         return AXIOS.get('/pet');
     },
-    readPet(petId){
-        return AXIOS.get('/pet/'+petId);
+    readPet(petId) {
+        return AXIOS.get('/pet/' + petId);
     },
 
-    updatePet(petId, pet){
-        return AXIOS.put('/pet/'+petId,{name:pet.name, takeInDate:pet.takeInDate, species:pet.species,
-            sex:pet.sex, age:pet.age,
-            canLiveWithOtherDogs:pet.canLiveWithOtherDogs,
-            canLiveWithOtherCats:pet.canLiveWithOtherCats,
-            canLiveWithKids:pet.canLiveWithKids,
-            activity:pet.activity,
-            diseases:pet.diseases});
+    updatePet(petId, pet) {
+        return AXIOS.put('/pet/' + petId, {
+            name: pet.name, takeInDate: pet.takeInDate, species: pet.species,
+            sex: pet.sex, age: pet.age,
+            canLiveWithOtherDogs: pet.canLiveWithOtherDogs,
+            canLiveWithOtherCats: pet.canLiveWithOtherCats,
+            canLiveWithKids: pet.canLiveWithKids,
+            activity: pet.activity,
+            diseases: pet.diseases
+        });
     },
 
-    deletePet(petId){
-        return AXIOS.delete('/pet/'+petId);
+    deletePet(petId) {
+        return AXIOS.delete('/pet/' + petId);
+    },
+
+    readDiseases() {
+        return AXIOS.get('/disease');
+    },
+    createImage(formData) {
+        return AXIOS.post('/image', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 }
 

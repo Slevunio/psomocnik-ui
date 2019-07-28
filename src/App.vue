@@ -13,9 +13,9 @@
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item to="/login">Zaloguj</b-nav-item>
                     <b-nav-item to="/register">Zarejestruj</b-nav-item>
-                    <b-nav-item-dropdown text="Zarządzaj" class="myDropdown">
-                        <b-dropdown-item to="/managePets" class="myDropdownItem">Zwierzęta</b-dropdown-item>
-                        <b-dropdown-item to="/manageUsers" class="myDropdownItem">Użytkownicy</b-dropdown-item>
+                    <b-nav-item-dropdown text="Zarządzaj" right no-caret>
+                        <b-dropdown-item to="/managePets">Zwierzęta</b-dropdown-item>
+                        <b-dropdown-item to="/manageUsers">Użytkownicy</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-navbar>
@@ -30,4 +30,3 @@
         name: 'app'
     }
 </script>
-

@@ -15,6 +15,7 @@
                 <tr :id="pet.id" v-for="pet in pets">
                     <td>{{pet.id}}</td>
                     <td>{{pet.name}}</td>
+                    <td>{{pet.photos[0]}} </td>
                     <td><router-link :to="{name: 'editPet', params:{petId:pet.id}}" tag="button" class="btn btn-psomocnik">Edytuj</router-link></td>
                     <td>
                         <button type="button" class="btn btn-psomocnik" data-toggle="modal" data-target="#deleteModal"
