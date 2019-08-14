@@ -42,7 +42,7 @@ export default {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
-                boundary: '---------------'
+                boundary: '///////////'
 
             }
         );

@@ -8,7 +8,7 @@
             <!--pokaz slajdow-->
             <div class="carousel-inner">
                 <div class="carousel-item" v-for="(photo, index) in pet.photos" :class="{active: index==0}">
-                    <img :src="photo" class="img-fluid">
+                    <img :src="photo" class="img-fluid"><!--href wskazujacy na url-->
                 </div>
             </div>
             <!--Strzalki w lewo/prawo-->

@@ -5,9 +5,9 @@
             <br>
             <div class="card-columns text-center">
             <span v-for="pet in pets" style="display: inline-block">
-            <pet-card route="editPet" :petId="pet.pet.id" :name="pet.pet.name" :image="pet.photos[0]"></pet-card>
+            <pet-card route="editPet" :petId="pet.id" :name="pet.name" :image="pet.photos[0]"></pet-card>
                 <button type="button" class="btn btn-delete" data-toggle="modal" data-target="#deleteModal"
-                        @click.capture="setId(pet.pet.id)">Usuń
+                        @click.capture="setId(pet.id)">Usuń
                     </button>
             </span>
             </div>

@@ -120,7 +120,7 @@
 
             createPet() {
                 let formData = new FormData();
-                for (var item in this.pet) { //check var let const
+                for (var item in this.pet) {
                     if (item === 'diseases') {
                         formData.append(item, JSON.stringify(this.pet[item]));
                     } else {
