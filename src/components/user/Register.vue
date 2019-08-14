@@ -1,9 +1,8 @@
 <template>
     <div class="container-fluid" style="margin-top:50px;" id="registration">
         <div class="container" style="margin-top:25px;">
-            <div class="col-12 text-center">
-                <h1 class="display-3">Strona rejestracji</h1>
-            </div>
+                <h1 class="display-4 text-center">Rejestracja</h1>
+            <br>
             <div class="col-5">
                 <form @submit.prevent="register()">
                     <input-text type="text" label="Nazwa użytkownika" name="registerUsername"
@@ -58,5 +57,8 @@
 </script>
 
 <style scoped>
-
+h1{
+    font-family: "Trebuchet MS";
+    font-weight: bold;
+}
 </style>

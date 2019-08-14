@@ -1,10 +1,8 @@
 <template>
     <div class="container-fluid" style="margin-top:50px;">
-        <div class="col-12 text-center">
-            <h1 class="display-3">Dodaj zwierzę</h1>
-        </div>
+            <h1 class="display-4 text-center">Dodaj zwierzę</h1>
         <div class="container">
-            <form id="pet" @submit.prevent="createPet()">
+            <form id="pet" enctype="multipart/form-data" @submit.prevent="createPet()">
 
                 <input-text type="text" name="name" label="Imię" v-model="pet.name"
                             placeholder="Wprowadź imię zwierzęcia"></input-text>
@@ -43,14 +41,12 @@
                     </tr>
                 </table>
                 <br>
-                <div class="large-12 medium-12 small-12 cell">
-                    <label>Zdjęcia
+                <div><!-- class="large-12 medium-12 small-12 cell">-->
+                    <h5>Zdjęcia</h5>
                         <input type="file" id="photos" ref="photos" multiple @change="handlePhotosUpload()"/>
-                    </label>
                 </div>
-                <div class="large-12 medium-12 small-12 cell">
-                    <div v-for="(photo, key) in photos" class="file-listing">{{ photo.name }} <span class="remove-file"
-                                                                                                    @click="removePhoto( key )">Usuń</span>
+                <div> <!--class="large-12 medium-12 small-12 cell"-->
+                    <div v-for="(photo) in photos"> <!--class="file-listing"-->{{ photo.name }}
                     </div>
                 </div>
                 <br>
@@ -103,7 +99,7 @@
             addDisease(disease) {
                 this.pet.diseases.push(disease);
             },
-            deleteDisease(disease) {
+            deleteDisease(disease) { //JQUERY
                 for (var i = 0; i < this.pet.diseases.length; i++) {
                     if (this.pet.diseases[i] === disease) {
                         this.pet.diseases.splice(i, 1);
@@ -122,23 +118,21 @@
                 }
             },
 
-            removePhoto(key) {
-                this.photos.splice(key, 1);
-            },
             createPet() {
                 let formData = new FormData();
-                for (var item in this.pet) {
+                for (var item in this.pet) { //check var let const
                     if (item === 'diseases') {
                         formData.append(item, JSON.stringify(this.pet[item]));
                     } else {
                         formData.append(item, this.pet[item]);
                     }
                 }
-
                 for (var i = 0; i < this.photos.length; i++) {
-                    formData.append(this.photos[i].name, this.photos[i]);
+                    formData.append('photos', this.photos[i]);
                 }
-                api.createPet(formData).then(
+
+                api.createPet(formData)
+                .then(
                     document.location.replace("/managePets")
                 );
             }
@@ -147,5 +141,8 @@
 </script>
 
 <style scoped>
-
+    h1 {
+        font-family: "Trebuchet MS";
+        font-weight: bold;
+    }
 </style>

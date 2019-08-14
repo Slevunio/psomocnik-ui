@@ -30,3 +30,9 @@
         name: 'app'
     }
 </script>
+<style scoped>
+    .navbar-dark .navbar-nav .nav-item {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        font-size: 18px;
+    }
+</style>

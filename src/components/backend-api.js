@@ -41,7 +41,8 @@ export default {
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                }
+                },
+                boundary: '---------------'
 
             }
         );
@@ -72,13 +73,6 @@ export default {
 
     readDiseases() {
         return AXIOS.get('/disease');
-    },
-    createImage(formData) {
-        return AXIOS.post('/image', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
     }
 }
 
