@@ -1,25 +1,22 @@
-.bg-psomocnik, .btn-psomocnik {
-    background-color: #3ed4c2;
+.bg-psomocnik {
+    background-color: #3ed4c4;
 }
 
+.btn-psomocnik {
+    background-color: #1dc5b3;
+    color: white;
+}
 
 .btn-psomocnik:hover {
     cursor: pointer;
-    background-color: rgba(62, 212, 194, 0.6);
-    font-weight: 500;
-    /*color:white;*/
+    color: white;
+    font-weight: 600;
 }
 
-.btn-psomocnik:focus {
-    background-color: rgba(62, 212, 194, 0.9); /*#1e2226;*/
-    /*color:white;*/
-    /*margin-top: 2px;*/
-}
-
-.btn-psomocnik.active,.btn-psomocnik:active {
-    background-color: #1e2226;
-    color:white;
-    margin-top: 2px;
+.btn-psomocnik.active, .btn-psomocnik:active {
+    background-color: #00b3a0;
+    border: 2px solid #ffb325;
+    font-weight: 600;
 }
 
 .carousel-item .img-fluid {
@@ -31,43 +28,70 @@
     display: none;
 }
 
-.navbar-dark .navbar-nav .nav-item:after {
+.navbar {
+    background-color: #00b3a0;
+}
+
+.navbar .navbar-nav .nav-item {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 18px;
+}
+
+.navbar .navbar-nav .nav-item:after {
     content: '';
     display: block;
-    border-bottom: 3px solid #3ed4c2;
+    border-bottom: 3px solid #ffb325;
     width: 0;
     transition: 0.4s;
 }
 
-.navbar-dark .navbar-nav .nav-item:hover:after {
+.navbar .navbar-nav .nav-item:hover:after {
     width: 100%;
 }
 
-.navbar-dark .navbar-nav .nav-link:hover {
-    font-weight: 500;
+.navbar .navbar-nav .nav-link:focus {
+    background-color: #1dc5b3;
+    color: white;
+    font-weight: 600;
 }
 
-.dropdown:after {
-    content: '';
-    display: block;
-    border-bottom: 3px solid #3ed4c2;
-    width: 0;
-    transition: 1s ease;
+.navbar .navbar-nav .nav-link {
+    color: white;
 }
 
-.dropdown:hover:after {
-    width: 100%;
+.navbar .navbar-nav .nav-link:hover {
+    font-weight: 600;
+    color: white;
 }
 
 .navbar .dropdown-menu {
-    background: #343a40;
+    background-color: #00b3a0;
+}
+
+.navbar .navbar-nav .show > .nav-link {
+    background-color: #1dc5b3;
+    color: white;
+    font-weight: 600;
 }
 
 .navbar .dropdown-menu .dropdown-item {
-    color: rgba(255, 255, 255, 0.5);
+    color: white;
 }
 
 .navbar .dropdown-menu .dropdown-item:hover {
     color: white;
-    background-color: #3ed4c2;
+    font-weight: 600;
+    background-color: #00b3a0;
+}
+
+.navbar .dropdown-menu .dropdown-item:after {
+    content: '';
+    display: block;
+    border-bottom: 3px solid #ffb325;
+    width: 0;
+    transition: 0.4s;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover:after {
+    width: 100%;
 }

@@ -7,8 +7,8 @@
             </ul>
             <!--pokaz slajdow-->
             <div class="carousel-inner">
-                <div class="carousel-item" v-for="(photo, index) in pet.photos" :class="{active: index==0}">
-                    <img :src="photo" class="img-fluid"><!--href wskazujacy na url-->
+                <div class="carousel-item" v-for="(photo, index) in pet.photosIds" :class="{active: index==0}">
+                    <img :src='"/api/photos/"+photo' class="img-fluid">
                 </div>
             </div>
             <!--Strzalki w lewo/prawo-->
@@ -21,7 +21,7 @@
         </div>
         <div class="container">
             <br>
-            <h1 class="display-4 text-center">{{pet.pet.name}}</h1>
+            <h1 class="display-4 text-center">{{pet.name}}</h1>
             <br>
             <div>
                 <h2><p class="pet-info-paragraph">Opis</p></h2>
@@ -41,7 +41,7 @@
                 <table>
                     <tr>
                         <td class="td-left">Płeć</td>
-                        <td class="td-right">{{pet.pet.sex}}</td>
+                        <td class="td-right">{{pet.sex}}</td>
                     </tr>
                     <tr>
                         <td class="td-left">Data przyjęcia</td>
@@ -49,28 +49,36 @@
                     </tr>
                     <tr>
                         <td class="td-left">Wiek</td>
-                        <td class="td-right">{{pet.pet.age}}</td>
+                        <td class="td-right">{{pet.age}}</td>
                     </tr>
                     <tr>
                         <td class="td-left">Czy może mieszkać z psami</td>
-                        <td class="td-right">{{pet.pet.canLiveWithOtherDogs}}</td>
+                        <td class="td-right">{{pet.canLiveWithOtherDogs}}</td>
                     </tr>
                     <tr>
                         <td class="td-left">Czy może mieszkać z kotami</td>
-                        <td class="td-right">{{pet.pet.canLiveWithOtherCats}}</td>
+                        <td class="td-right">{{pet.canLiveWithOtherCats}}</td>
                     </tr>
                     <tr>
                         <td class="td-left">Czy może mieszkać z dziećmi</td>
-                        <td class="td-right">{{pet.pet.canLiveWithKids}}</td>
+                        <td class="td-right">{{pet.canLiveWithKids}}</td>
                     </tr>
                     <tr>
                         <td class="td-left">Aktywność (w skali 1-10)</td>
-                        <td class="td-right">{{pet.pet.activity}}</td>
+                        <td class="td-right">{{pet.activity}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-left">Umaszczenie</td>
+                        <td class="td-right">{{pet.coat}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-left">Sierść</td>
+                        <td class="td-right">{{pet.fur}}</td>
                     </tr>
                     <tr style="border-bottom: none">
                         <td class="td-left">Choroby</td>
-                        <td class="td-right"><span v-for="(disease, index) in pet.pet.diseases"><span id="diseases">{{disease.name}}</span><span
-                                v-if="index!==pet.pet.diseases.length-1">, </span></span></td>
+                        <td class="td-right"><span v-for="(disease, index) in pet.diseases"><span id="diseases">{{disease}}</span><span
+                                v-if="index!==pet.diseases.length-1">, </span></span></td>
                     </tr>
                 </table>
         </div>
@@ -85,7 +93,7 @@
         data() {
             return {
                 pet: '',
-                fotmattedDate: ''
+                formattedDate: ''
             }
         },
         mounted() {
@@ -108,7 +116,7 @@
             },
 
             formatDate() {
-                var splitted = this.pet.pet.takeInDate.split('T');
+                var splitted = this.pet.takeInDate.split('T');
                 this.formattedDate = splitted[0];
             }
         }

@@ -37,20 +37,33 @@
                 user: {
                     username: '',
                     email: '',
-                    role: 'user',
+                    role: '',
                     password: '',
                     passwordConfirm: ''
                 }
             }
         },
+        mounted(){
+            this.readRole();
+        },
         methods: {
+            readRole(){
+              api.readRole('USER').then(response=>{
+                  this.user.role=response.data;
+              })
+            },
             register() {
                 if (this.password !== this.passwordConfirm) {
                     alert("Passwords do not match");
                     return;
                 }
-                api.registerUser(this.user).then(
-                    document.location.replace("/manageUsers"));
+                var self = this;
+                api.registerUser(this.user).then(response=>{
+                    self.$session.set('token', response.data.token);
+                    self.$session.set('role', response.data.role.toString().substr(1, response.data.role.toString().length - 2));
+                }).then(
+                    //document.location.replace("/")
+                );
             }
         }
     }

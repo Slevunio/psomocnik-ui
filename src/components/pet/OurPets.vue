@@ -5,7 +5,7 @@
             <br>
             <div class="card-columns text-center">
             <span v-for="pet in pets" style="display: inline-block">
-                <pet-card route="petInfo" :petId="pet.pet.id" :name="pet.pet.name" :image="pet.photos[0]"></pet-card>
+                <pet-card route="petInfo" :petId="pet.id" :name="pet.name" :image="pet.photosIds[0]"></pet-card>
             </span>
             </div>
         </div>
