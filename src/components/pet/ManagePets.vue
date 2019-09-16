@@ -6,12 +6,13 @@
                 <h1 class="display-4 text-center">Zarządzaj zwierzętami</h1>
                 <br>
                 <div class="card-columns text-center">
-            <span v-for="pet in pets" style="display: inline-block">
-            <pet-card route="editPet" :petId="pet.id" :name="pet.name" :image="pet.photosIds[0]"></pet-card>
-                <button type="button" class="btn btn-delete" data-toggle="modal" data-target="#deleteModal"
-                        @click.capture="setId(pet.id)">Usuń
-                    </button>
-            </span>
+                    <div v-for="pet in pets" style="display: inline-block">
+                        <pet-card route="editPet" :petId="pet.id" :name="pet.name"
+                                  :image="pet.photosIds[0]"></pet-card>
+                        <button type="button" class="btn btn-delete" data-toggle="modal" data-target="#deleteModal"
+                                @click.capture="setId(pet.id)">Usuń
+                        </button>
+                    </div>
                 </div>
                 <br><br>
                 <router-link to="/addPet" tag="button" class="btn btn-psomocnik">Dodaj</router-link>
@@ -28,7 +29,8 @@
                                     </button>
                                 </div>
                                 <div class="col-6 text-center">
-                                    <button type="button" class="btn btn-psomocnik" data-dismiss="modal">Anuluj</button>
+                                    <button type="button" class="btn btn-psomocnik" data-dismiss="modal">Anuluj
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +53,7 @@
             return {
                 pets: [],
                 id: "",
-                role:''
+                role: ''
             }
         },
 
@@ -63,20 +65,22 @@
         methods: {
             checkRole() {
                 this.role = localStorage.getItem('role');
-                if (this.role !== 'ADMIN' && this.role !=='MODERATOR') {
+                if (this.role !== 'ADMIN' && this.role !== 'MODERATOR') {
                     document.location.replace("/");
                 }
             },
             readPets() {
                 api.readPets().then(response => {
-                    this.pets = response.data;
+                    this.pets = response;
                 });
             },
             setId(id) {
                 this.id = id;
             },
             deletePet() {
-                api.deletePet(this.id, localStorage.getItem('token')).then(document.location.replace("/managePets"));
+                api.deletePet(this.id).then(response => {
+                    document.location.replace("/managePets")
+                });
             }
         }
     }
@@ -90,12 +94,20 @@
 
     .btn-delete {
         background-color: #3ed4c2;
-        width: 100%;
+        width: 188px;
         font-size: 18px;
+        color: white;
     }
 
     .btn-delete:hover {
-        background-color: rgba(62, 212, 194, 0.6);
         font-weight: 500;
+        color: #ffb325;
     }
+    /*@media (min-width: 34em) {
+        .card-columns {
+            -webkit-column-count: 5;
+            -moz-column-count: 5;
+            column-count: 5;
+        }
+    }*/
 </style>

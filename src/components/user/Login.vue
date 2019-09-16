@@ -6,9 +6,9 @@
             <div class="col-5">
                 <form @submit.prevent="login()">
                     <input-text type="text" label="Nazwa użytkownika" name="username"
-                                placeholder="Wprowadź nazwę użytkownika" v-model="user.username"></input-text>
+                                placeholder="Wprowadź nazwę użytkownika" v-model="username"></input-text>
                     <input-text type="password" label="Hasło" name="password" placeholder="Wprowadź hasło"
-                                v-model="user.password"></input-text>
+                                v-model="password"></input-text>
                     <div class="col text-center">
                         <button type="button" class="btn-lg btn-psomocnik" @click="login()">Zaloguj</button>
                     </div>
@@ -20,7 +20,10 @@
 
 <script>
     import InputText from '../customTags/InputText';
+    import axios from 'axios'
+
     import api from '../backend-api';
+    import jwt_decode from 'jwt-decode'
 
     export default {
         name: "Login",
@@ -29,22 +32,20 @@
         },
         data() {
             return {
-                user: {
-                    username: '',
-                    password: ''
-                }
+
+                username: '',
+                password: ''
+
             }
         },
         methods: {
             login() {
-                var self = this;
-                api.loginUser(this.user).then(response => {
-                    /*self.$session.set('token', response.data.token);
-                    self.$session.set('role', response.data.role.toString().substr(1, response.data.role.toString().length - 2));*/
-                    // localStorage.setItem("token", response.data.token);
-                    localStorage.token = response.data.token;
-                    localStorage.setItem("role", response.data.role.toString().substr(1, response.data.role.toString().length - 2));
-                })//.then(document.location.replace("/"));
+                api.login(this.username, this.password).then(response => {
+                    localStorage.setItem("token", response.access_token);
+                    localStorage.setItem("role", jwt_decode(response.access_token).authorities[0]);
+                }).then(localStorage=>{
+                    document.location.replace("/");
+                })
 
             }
         }

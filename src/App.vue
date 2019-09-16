@@ -11,7 +11,7 @@
                     <b-nav-item to="/contact">Kontakt</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
-                    <div v-if="role===null || role===undefined">
+                    <div v-if="role===null || role==='undefined'">
                         <b-nav-item to="/login">Zaloguj</b-nav-item>
                     </div>
                     <div v-else>

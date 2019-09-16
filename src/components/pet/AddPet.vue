@@ -132,8 +132,8 @@
                 }
             },
             readDiseases() {
-                api.readDiseases(localStorage.getItem('token')).then(response => {
-                    this.diseases = response.data;
+                api.readDiseases().then(response => {
+                    this.diseases = response;
                 });
             },
             handlePhotosUpload() {
@@ -159,9 +159,10 @@
                     formData.append('photos', this.photos[i]);
                 }
 
-                api.createPet(formData, localStorage.getItem('token'))
-                    .then(
+                api.createPet(formData)
+                    .then(response=> {
                         document.location.replace("/managePets")
+                        }
                     );
             }
         }

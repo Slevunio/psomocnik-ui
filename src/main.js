@@ -7,7 +7,6 @@ import Vue from 'vue'
 //import VueCookies from 'vue-cookies'
 import App from './App.vue' //główny szablon
 import router from './router'
-import VueSessionStorage from 'vue-sessionstorage'
 
 
 Vue.config.productionTip = false;   //nie wyswietlaj podpowiedzi
@@ -15,7 +14,6 @@ Vue.config.productionTip = false;   //nie wyswietlaj podpowiedzi
 // Bootstrap
 Vue.use(BootstrapVue);  //instlauje bootstrapvue
 //SessionStorage
-Vue.use(VueSessionStorage)
 //Cookies
 //Vue.use(VueCookies);
 

@@ -108,7 +108,7 @@
             findPet() {
                 api.findPet(this.form).then(
                     response => {
-                        this.pets = response.data;
+                        this.pets = response;
                        // this.matchedPetsToCookies(JSON.stringify(response.data));
                     }
                 );

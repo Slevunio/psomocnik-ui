@@ -94,16 +94,17 @@
                 }
             },
             readUsers() {
-                api.readUsers(localStorage.getItem('token')).then(response => {
-                    this.users = response.data;
+                api.readUsers().then(response => {
+                    this.users = response;
                 });
             },
             setId(id) {
                 this.id = id;
             },
             deleteUser() {
-                api.deleteUser(this.id, localStorage.getItem('token')).then(
+                api.deleteUser(this.id).then(response=> {
                     document.location.replace("/manageUsers")
+                    }
                 );
             }
         }

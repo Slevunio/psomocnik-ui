@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid" style="margin-top:50px;" id="registration">
         <div class="container" style="margin-top:25px;">
-                <h1 class="display-4 text-center">Rejestracja</h1>
+            <h1 class="display-4 text-center">Rejestracja</h1>
             <br>
             <div class="col-5">
                 <form @submit.prevent="register()">
@@ -43,26 +43,23 @@
                 }
             }
         },
-        mounted(){
+        mounted() {
             this.readRole();
         },
         methods: {
-            readRole(){
-              api.readRole('USER').then(response=>{
-                  this.user.role=response.data;
-              })
+            readRole() {
+                api.readRole('USER').then(response => {
+                    this.user.role = response;
+                })
             },
             register() {
                 if (this.password !== this.passwordConfirm) {
                     alert("Passwords do not match");
                     return;
                 }
-                var self = this;
-                api.registerUser(this.user).then(response=>{
-                    self.$session.set('token', response.data.token);
-                    self.$session.set('role', response.data.role.toString().substr(1, response.data.role.toString().length - 2));
-                }).then(
-                    //document.location.replace("/")
+                api.registerUser(this.user).then(response => {
+                        document.location.replace("/")
+                    }
                 );
             }
         }
@@ -70,8 +67,8 @@
 </script>
 
 <style scoped>
-h1{
-    font-family: "Trebuchet MS";
-    font-weight: bold;
-}
+    h1 {
+        font-family: "Trebuchet MS";
+        font-weight: bold;
+    }
 </style>

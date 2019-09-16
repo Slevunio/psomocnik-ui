@@ -61,7 +61,7 @@
                         <td id="coat">{{pet.coat}}</td>
                         <td id="fur">{{pet.fur}}</td>
                         <td><span v-for="(disease, index) in pet.diseases"><span
-                                id="diseases">{{disease.name}}</span><span
+                                id="diseases">{{disease}}</span><span
                                 v-if="index!==pet.diseases.length-1">, </span></span></td>
                     </tr>
                     <tr class="text-center">
@@ -94,13 +94,13 @@
                             <edit-pet-button elementid="activity"></edit-pet-button>
                         </td>
                         <td>
-                            <edit-pet-button elementid="diseases"></edit-pet-button>
-                        </td>
-                        <td>
                             <edit-pet-button elementid="coat"></edit-pet-button>
                         </td>
                         <td>
                             <edit-pet-button elementid="fur"></edit-pet-button>
+                        </td>
+                        <td>
+                            <edit-pet-button elementid="diseases"></edit-pet-button>
                         </td>
                     </tr>
                     </tbody>
@@ -194,9 +194,10 @@
             this.checkRole();
             this.getPet();
         },
-        beforeUpdate() {
-            this.formatDate();
+        beforeUpdate(){
+            this.formatDate()
         },
+
         methods: {
             checkRole() {
                 this.role = localStorage.getItem('role');
@@ -205,8 +206,8 @@
                 }
             },
             getPet() {
-                api.readPet(this.getPetId(), this.$session.get('token')).then(response => {
-                    this.pet = response.data;
+                api.readPet(this.getPetId()).then(response => {
+                    this.pet = response;
                 });
             },
             formatDate() {
@@ -230,7 +231,7 @@
                 this.updatedPet[this.elementId] = newValue;
             },
             editPet() {
-                api.updatePet(this.getPetId(), this.updatedPet, localStorage.getItem('token')).then(
+                api.updatePet(this.getPetId(), this.updatedPet).then(
                     document.location.replace("/managePets")
                 );
             }

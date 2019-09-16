@@ -140,8 +140,8 @@
                 }
             },
             getUser() {
-                api.readUser(this.getUserId(), localStorage.getItem('token')).then(response => {
-                    this.user = response.data;
+                api.readUser(this.getUserId()).then(response => {
+                    this.user = response;
                 });
             },
             getUserId() {
@@ -149,7 +149,7 @@
                 return splitted[splitted.length - 1];
             },
             editUser() {
-                api.updateUser(this.getUserId(), this.updatedUser, localStorage.getItem('token')).then(
+                api.updateUser(this.getUserId(), this.updatedUser).then(
                     document.location.replace("/manageUsers")
                 );
             },

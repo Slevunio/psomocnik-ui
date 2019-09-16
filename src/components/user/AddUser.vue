@@ -75,7 +75,7 @@
             },
             readRoles() {
                 api.readRoles().then(response => {
-                    this.roles = response.data;
+                    this.roles = response;
                 });
             },
 
@@ -84,9 +84,9 @@
             },
 
             createUser() {
-                api.createUser(this.user, localStorage.getItem('token')).then(
+                api.createUser(this.user).then(response=> {
                     document.location.replace("/manageUsers")
-                   // window.location="http://localhost:8080/manageUsers"
+                    }
                 );
             }
         }

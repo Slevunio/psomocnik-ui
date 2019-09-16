@@ -111,7 +111,7 @@
 
             readPet() {
                 api.readPet(this.getPetId()).then(response => {
-                    this.pet = response.data;
+                    this.pet = response;
                 });
             },
 
