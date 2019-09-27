@@ -1,4 +1,4 @@
-.bg-psomocnik {
+/*.bg-psomocnik {
     background-color: #3ed4c4;
 }
 
@@ -17,17 +17,14 @@
     background-color: #00b3a0;
     border: 2px solid #ffb325;
     font-weight: 600;
-}
+}*/
 
 .carousel-item .img-fluid {
     width: 100%;
     height: 100%;
 }
 
-[type='radio'] {
-    display: none;
-}
-
+/*
 .navbar {
     background-color: #00b3a0;
 }
@@ -94,4 +91,4 @@
 
 .navbar .dropdown-menu .dropdown-item:hover:after {
     width: 100%;
-}
+}*/

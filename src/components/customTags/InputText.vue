@@ -1,6 +1,6 @@
 <template>
     <div class="form-group">
-        <label for="name"><h5>{{label}}</h5></label>
+        <label for="name"><h5 class="display-6 text-secondary">{{label}}</h5></label>
         <input :type="type" :id="name" :name="name" :placeholder="placeholder" class="form-control" :value="value"
                v-model="inputValue">
     </div>

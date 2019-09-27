@@ -1,6 +1,5 @@
 <template>
-    <div v-if="role!=='ADMIN' && role!=='MODERATOR'"></div>
-    <div v-else>
+    <div>
         <div class="container-fluid" style="margin-top:50px;">
             <div class="col-12 text-center">
                 <h1 class="display-3">Dodaj użytkownika</h1>
@@ -19,12 +18,12 @@
                                    placeholder="Wprowadź email">
                         </div>
                         <div class="dropdown">
-                            <button class="btn btn-psomocnik dropdown-toggle" data-toggle="dropdown"><span
+                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span
                                     v-if="user.role===''">Typ użytkownika</span>
                                 <span v-else>{{user.role.name}}</span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="role in roles" @click="setRole(role)"><a href="javascript:void(0)">{{role.name}}</a>
+                                <li v-for="role in roles" @click="setRole(role)"><a class="dropdown-item" href="javascript:void(0)">{{role.name}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -35,7 +34,7 @@
                         </div>
                     </div>
                     <div class="col text-center">
-                        <button type="submit" id="submitCreateUser" class="btn btn-lg btn-psomocnik">Dodaj</button>
+                        <button type="submit" id="submitCreateUser" class="btn btn-lg btn-primary">Dodaj</button>
                     </div>
                 </form>
             </div>
@@ -56,23 +55,15 @@
                     role: '',
                     password: ''
                 },
-                roles: [],
-                role:''
+                roles: []
             }
         },
 
         mounted() {
-            this.checkRole();
             this.readRoles();
         },
 
         methods: {
-            checkRole() {
-                this.role = localStorage.getItem('role');
-                if (this.role !== 'ADMIN' && this.role !=='MODERATOR') {
-                    document.location.replace("/");
-                }
-            },
             readRoles() {
                 api.readRoles().then(response => {
                     this.roles = response;

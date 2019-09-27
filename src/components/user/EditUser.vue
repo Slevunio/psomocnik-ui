@@ -1,6 +1,5 @@
 <template>
-    <div v-if="role!=='ADMIN'"></div>
-    <div v-else>
+    <div>
         <div class="container-fluid" style="margin-top:50px;" id="user">
             <div class="container">
                 <h1 class="display-4 text-center">Edytuj użytkownika</h1>
@@ -25,7 +24,7 @@
                         </th>
                     </tr>
                     </thead>
-                    <tbody class="bg-psomocnik">
+                    <tbody class="bg-light">
                     <tr class="text-center">
                         <td id="username">{{user.username}}</td>
                         <td id="email">{{user.email}}</td>
@@ -35,20 +34,20 @@
                     </tr>
                     <tr class="text-center">
                         <td>
-                            <button type="button" class="btn btn-psomocnik" id="editUsername"
+                            <button type="button" class="btn btn-primary" id="editUsername"
                                     @click.capture="setElementId('username')" data-toggle="modal"
                                     data-target="#editModal">
                                 Edytuj
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-psomocnik" id="editEmail"
+                            <button type="button" class="btn btn-primary" id="editEmail"
                                     @click.capture="setElementId('email')" data-toggle="modal" data-target="#editModal">
                                 Edytuj
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-psomocnik" id="editType"
+                            <button type="button" class="btn btn-primary" id="editType"
                                     @click.capture="setElementId('role')" data-toggle="modal" data-target="#editModal">
                                 Edytuj
                             </button>
@@ -59,7 +58,7 @@
                     </tbody>
                 </table>
                 <div class="col-12 text-center">
-                    <button type="button" class="btn btn-psomocnik btn-lg" id="editUserSubmit" data-toggle="modal"
+                    <button type="button" class="btn btn-primary btn-lg" id="editUserSubmit" data-toggle="modal"
                             data-target="#submitModal">
                         Zatwierdź
                     </button>
@@ -78,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-psomocnik" id="editInputModalSubmit"
+                                <button type="button" class="btn btn-primary" id="editInputModalSubmit"
                                         data-dismiss="modal"
                                         @click.capture="editValue()">Ok
                                 </button>
@@ -95,12 +94,12 @@
                             </div>
                             <div class="modal-footer">
                                 <div class="col-6 text-center">
-                                    <button type="button" class="btn btn-psomocnik" id="editUserModalSubmit"
+                                    <button type="button" class="btn btn-primary" id="editUserModalSubmit"
                                             data-dismiss="modal" @click.capture="editUser()">Ok
                                     </button>
                                 </div>
                                 <div class="col-6 text-center">
-                                    <button type="button" class="btn btn-psomocnik" data-dismiss="modal">Anuluj</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Anuluj</button>
                                 </div>
                             </div>
                         </div>
@@ -129,16 +128,9 @@
             }
         },
         mounted() {
-            this.checkRole();
             this.getUser();
         },
         methods: {
-            checkRole() {
-                this.role = localStorage.getItem('role');
-                if (this.role !== 'ADMIN') {
-                    document.location.replace("/");
-                }
-            },
             getUser() {
                 api.readUser(this.getUserId()).then(response => {
                     this.user = response;
@@ -171,8 +163,8 @@
 </script>
 
 <style scoped>
-    h1 {
+    /*h1 {
         font-family: "Trebuchet MS";
         font-weight: bold;
-    }
+    }*/
 </style>

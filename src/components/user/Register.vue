@@ -1,7 +1,6 @@
 <template>
-    <div class="container-fluid" style="margin-top:50px;" id="registration">
-        <div class="container" style="margin-top:25px;">
-            <h1 class="display-4 text-center">Rejestracja</h1>
+        <div class="container" style="margin-top:50px;" id="registration">
+            <h1 class="display-5 text-center text-dark">Rejestracja</h1>
             <br>
             <div class="col-5">
                 <form @submit.prevent="register()">
@@ -14,13 +13,11 @@
                     <input-text type="password" label="Potwierdź hasło" name="registerPasswordConfirm"
                                 placeholder="Potwierdź hasło" v-model="user.passwordConfirm"></input-text>
                     <div class="col text-center">
-                        <button type="button" class="btn-lg btn-psomocnik" @click="register()">Rejestruj</button>
+                        <button type="button" class="btn-lg btn-primary" @click="register()">Rejestruj</button>
                     </div>
                 </form>
             </div>
         </div>
-
-    </div>
 </template>
 
 <script>
@@ -67,8 +64,8 @@
 </script>
 
 <style scoped>
-    h1 {
+    /*h1 {
         font-family: "Trebuchet MS";
         font-weight: bold;
-    }
+    }*/
 </style>

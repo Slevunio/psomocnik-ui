@@ -1,12 +1,11 @@
 <template>
-    <div v-if="role !== 'ADMIN' && role !== 'MODERATOR'"></div>
-    <div v-else>
+    <div>
         <div class="container-fluid" style="margin-top:50px;" id="pet">
             <div class="container">
                 <h1 class="display-3">Edytuj zwierzę</h1>
                 <br>
 
-                <table class="table">
+                <table class="table table-light">
                     <thead class="thead-dark">
                     <tr class="text-center">
                         <th>
@@ -47,10 +46,10 @@
                         </th>
                     </tr>
                     </thead>
-                    <tbody class="bg-psomocnik">
+                    <tbody class="bg-light">
                     <tr class="text-center">
                         <td id="name">{{pet.name}}</td>
-                        <td id="takeInDate">{{formattedDate}}</td>
+                        <td id="takeInDate">{{pet.takeInDate}}</td>
                         <td id="species">{{pet.species}}</td>
                         <td id="sex">{{pet.sex}}</td>
                         <td id="age">{{pet.age}}</td>
@@ -106,7 +105,7 @@
                     </tbody>
                 </table>
                 <div class="col-12 text-center">
-                    <button type="button" class="btn btn-psomocnik btn-lg" data-toggle="modal"
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
                             data-target="#submitModal">
                         Zatwierdź
                     </button>
@@ -120,12 +119,12 @@
                             </div>
                             <div class="modal-footer">
                                 <div class="col-6 text-center">
-                                    <button type="submit" class="btn btn-psomocnik" v-on:click.capture="editPet()"
+                                    <button type="submit" class="btn btn-primary" v-on:click.capture="editPet()"
                                             data-dismiss="modal">Ok
                                     </button>
                                 </div>
                                 <div class="col-6 text-center">
-                                    <button type="button" class="btn btn-psomocnik" data-dismiss="modal">Anuluj</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Anuluj</button>
                                 </div>
                             </div>
                         </div>
@@ -145,7 +144,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-psomocnik" v-on:click.capture="editValue()"
+                                <button type="button" class="btn btn-primary" v-on:click.capture="editValue()"
                                         data-dismiss="modal">
                                     Ok
                                 </button>
@@ -171,7 +170,6 @@
         data() {
             return {
                 pet: '',
-                formattedDate: '',
                 elementId: '',
                 updatedPet: {
                     name: '',
@@ -186,33 +184,18 @@
                     diseases: '',
                     coat: '',
                     fur: ''
-                },
-                role: ''
+                }
             }
         },
         mounted() {
-            this.checkRole();
             this.getPet();
-        },
-        beforeUpdate(){
-            this.formatDate()
         },
 
         methods: {
-            checkRole() {
-                this.role = localStorage.getItem('role');
-                if (this.role !== 'ADMIN' && this.role !=='MODERATOR') {
-                    document.location.replace("/");
-                }
-            },
             getPet() {
                 api.readPet(this.getPetId()).then(response => {
                     this.pet = response;
                 });
-            },
-            formatDate() {
-                var splitted = this.pet.takeInDate.split('T');
-                this.formattedDate = splitted[0] + ' ' + splitted[1];
             },
             getPetId() {
                 var splitted = window.location.href.split('/');

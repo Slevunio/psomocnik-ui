@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid" style="margin-top: 50px">
+    <div id="petInfo">
         <div id="photos" class="carousel slide" data-ride="carousel">
             <!--Indicators (w dolnej czesci karuzeli, pokazuja ilosc zdjec i na ktorym sie aktualnie znajduje)-->
             <ul class="carousel-indicators">
@@ -7,8 +7,8 @@
             </ul>
             <!--pokaz slajdow-->
             <div class="carousel-inner">
-                <div class="carousel-item" v-for="(photo, index) in pet.photosIds" :class="{active: index==0}">
-                    <img :src='"/api/photos/"+photo' class="img-fluid">
+                <div class="carousel-item" v-for="(photo, index) in pet.photosUrls" :class="{active: index==0}">
+                    <img :src='photo' class="img-fluid">
                 </div>
             </div>
             <!--Strzalki w lewo/prawo-->
@@ -21,66 +21,67 @@
         </div>
         <div class="container">
             <br>
-            <h1 class="display-4 text-center">{{pet.name}}</h1>
+            <h1 class="display-5 text-center text-dark">{{pet.name}}</h1>
             <br>
             <div>
-                <h2><p class="pet-info-paragraph">Opis</p></h2>
+                <h2 class="display-6 text-secondary"><p class="pet-info-paragraph">Opis</p></h2>
             </div>
             <br>
             <div style="margin-left: 10px">
-                <p>Krótki opis:</p>
-                <p>- czy potrafi chodzić na smyczy</p>
-                <p>- ogólne nastawienie do ludzi i innych zwierząt</p>
-                <p>- doświadczenia wolontariuszy opiekujących się zwierzakiem</p>
+                <blockquote>
+                    <p class="mb-0">Cytowana wypowiedź któregoś z wolontariuszy opisująca ogólne odczucia wolontariusza względem zwierzaka, czy coś</p>
+                    <footer class="blockquote-footer">Adam Karłowicz</footer>
+                </blockquote>
             </div>
             <br>
             <div>
-                <h2><p class="pet-info-paragraph">Cechy szczególne</p></h2>
+                <h2 class="display-6 text-secondary"><p class="pet-info-paragraph">Cechy szczególne</p></h2>
             </div>
             <br>
-                <table>
-                    <tr>
-                        <td class="td-left">Płeć</td>
-                        <td class="td-right">{{pet.sex}}</td>
-                    </tr>
-                    <tr>
-                        <td class="td-left">Data przyjęcia</td>
-                        <td class="td-right">{{formattedDate}}</td>
-                    </tr>
-                    <tr>
-                        <td class="td-left">Wiek</td>
-                        <td class="td-right">{{pet.age}}</td>
-                    </tr>
-                    <tr>
-                        <td class="td-left">Czy może mieszkać z psami</td>
-                        <td class="td-right">{{pet.canLiveWithOtherDogs}}</td>
-                    </tr>
-                    <tr>
-                        <td class="td-left">Czy może mieszkać z kotami</td>
-                        <td class="td-right">{{pet.canLiveWithOtherCats}}</td>
-                    </tr>
-                    <tr>
-                        <td class="td-left">Czy może mieszkać z dziećmi</td>
-                        <td class="td-right">{{pet.canLiveWithKids}}</td>
-                    </tr>
-                    <tr>
-                        <td class="td-left">Aktywność (w skali 1-10)</td>
-                        <td class="td-right">{{pet.activity}}</td>
-                    </tr>
-                    <tr>
-                        <td class="td-left">Umaszczenie</td>
-                        <td class="td-right">{{pet.coat}}</td>
-                    </tr>
-                    <tr>
-                        <td class="td-left">Sierść</td>
-                        <td class="td-right">{{pet.fur}}</td>
-                    </tr>
-                    <tr style="border-bottom: none">
-                        <td class="td-left">Choroby</td>
-                        <td class="td-right"><span v-for="(disease, index) in pet.diseases"><span id="diseases">{{disease}}</span><span
-                                v-if="index!==pet.diseases.length-1">, </span></span></td>
-                    </tr>
-                </table>
+            <table class="table table-primary">
+                <tr>
+                    <td class="td-left">Płeć</td>
+                    <td class="td-right">{{pet.sex}}</td>
+                </tr>
+                <tr>
+                    <td class="td-left">Data przyjęcia</td>
+                    <td class="td-right">{{formattedDate}}</td>
+                </tr>
+                <tr>
+                    <td class="td-left">Wiek</td>
+                    <td class="td-right">{{pet.age}}</td>
+                </tr>
+                <tr>
+                    <td class="td-left">Czy może mieszkać z psami</td>
+                    <td class="td-right">{{pet.canLiveWithOtherDogs}}</td>
+                </tr>
+                <tr>
+                    <td class="td-left">Czy może mieszkać z kotami</td>
+                    <td class="td-right">{{pet.canLiveWithOtherCats}}</td>
+                </tr>
+                <tr>
+                    <td class="td-left">Czy może mieszkać z dziećmi</td>
+                    <td class="td-right">{{pet.canLiveWithKids}}</td>
+                </tr>
+                <tr>
+                    <td class="td-left">Aktywność (w skali 1-10)</td>
+                    <td class="td-right">{{pet.activity}}</td>
+                </tr>
+                <tr>
+                    <td class="td-left">Umaszczenie</td>
+                    <td class="td-right">{{pet.coat}}</td>
+                </tr>
+                <tr>
+                    <td class="td-left">Sierść</td>
+                    <td class="td-right">{{pet.fur}}</td>
+                </tr>
+                <tr style="border-bottom: none">
+                    <td class="td-left">Choroby</td>
+                    <td class="td-right"><span v-for="(disease, index) in pet.diseases"><span
+                            id="diseases">{{disease}}</span><span
+                            v-if="index!==pet.diseases.length-1">, </span></span></td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>
@@ -124,55 +125,45 @@
 </script>
 
 <style scoped>
-    .carousel-item {
+    /*.carousel-item {
         width: 100%;
         height: 400px;
-    }
-
-    .display-4 {
-        font-family: "Goudy Stout";
-    }
-
-    h2 {
-        font-family: "Arial Rounded MT Bold";
-    }
-
+    }*/
     .pet-info-paragraph {
-        display: block;
+        display: inline-block;
         margin-bottom: 4px;
     }
 
     .pet-info-paragraph:after {
         content: '';
         display: block;
-        width: 30%;
+        width: 100%;
         height: 3px;
-        background-color: #3ed4c2;
-    }
-    table{
-        margin: auto;
-        text-align: center;
-        font-family: "Arial Rounded MT Bold";
-        font-size: 28px;
-
-    }
-    tr {
-        border-bottom: 2px solid #1e2226;
-
-    }
-    tr:hover{
-        background-color: rgba(30, 34, 38, 0.6);
+        background-color: #17a2b8;
     }
 
-    .td-left {
-        padding: 10px 50px 10px 50px;
-        border-right: 2px solid #1e2226;
-        font-weight: bold;
-    }
+    /*  table{
+          margin: auto;
+          text-align: center;
+          font-family: "Arial Rounded MT Bold";
+          font-size: 28px;
 
-    .td-right {
-        padding: 10px 50px 10px 50px;
-    }
+      }
+      tr {
+          border-bottom: 2px solid #1e2226;
 
+      }
+      tr:hover{
+          background-color: rgba(30, 34, 38, 0.6);
+      }*/
+
+      .td-left {
+          font-weight: bold;
+      }
+/*
+      .td-right {
+          padding: 10px 50px 10px 50px;
+      }
+  */
 
 </style>

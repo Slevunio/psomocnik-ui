@@ -1,30 +1,46 @@
 <template>
     <div id="app">
         <div id="nav">
-            <b-navbar>
-                <b-navbar-brand to="/">LOGO</b-navbar-brand>
-
-                <b-navbar-nav>
-                    <b-nav-item to="/">Strona główna</b-nav-item>
-                    <b-nav-item to="/ourPets">Nasze zwierzaki</b-nav-item>
-                    <b-nav-item to="/findPet">Znajdź tego jedynego</b-nav-item>
-                    <b-nav-item to="/contact">Kontakt</b-nav-item>
-                </b-navbar-nav>
-                <b-navbar-nav class="ml-auto">
+            <nav class="navbar navbar-dark navbar-expand-sm bg-primary">
+                <a class="navbar-brand" href="/"><img src="@/assets/images/logo.jpg" alt=""></a>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/findPet">Znajdź tego jedynego</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/ourPets">Nasze zwierzaki</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/contact">Kontakt</router-link>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
                     <div v-if="role===null || role==='undefined'">
-                        <b-nav-item to="/login">Zaloguj</b-nav-item>
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/login">Zaloguj</router-link>
+                        </li>
                     </div>
                     <div v-else>
-                        <b-nav-item @click="logout()">Wyloguj</b-nav-item>
+                        <li class="nav-item">
+                            <span class="nav-link" @click="logout()">
+                                Wyloguj
+                            </span>
+                        </li>
                     </div>
-                    <b-nav-item to="/register">Zarejestruj</b-nav-item>
-                    <span v-if="role==='ADMIN'">
-                    <b-nav-item-dropdown text="Zarządzaj" right no-caret>
-                        <b-dropdown-item to="/managePets">Zwierzęta</b-dropdown-item>
-                        <b-dropdown-item to="/manageUsers">Użytkownicy</b-dropdown-item>
-                    </b-nav-item-dropdown></span>
-                </b-navbar-nav>
-            </b-navbar>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/register">Zarejestruj</router-link>
+                    </li>
+                    <div v-if="role==='ADMIN'">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Zarządzaj</a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <router-link class="dropdown-item" to="/managePets">Zwierzęta</router-link>
+                                <router-link class="dropdown-item" to="/manageUsers">Użytkownicy</router-link>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </nav>
         </div>
         <router-view></router-view>
     </div>
@@ -54,5 +70,15 @@
     }
 </script>
 <style scoped>
+    .nav-link {
+        font-size: 18px;
+    }
 
+    .nav-link:hover {
+        cursor: pointer;
+    }
+    img{
+        height:50px;
+        width:50px;
+    }
 </style>

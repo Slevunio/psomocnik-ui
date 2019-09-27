@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="btn btn-psomocnik" @click="setElementId(elementid)" data-toggle="modal"
+    <button type="button" class="btn btn-primary" @click="setElementId(elementid)" data-toggle="modal"
             data-target="#editModal">
         Edytuj
     </button>

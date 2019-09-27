@@ -10,7 +10,7 @@
                     <input-text type="password" label="Hasło" name="password" placeholder="Wprowadź hasło"
                                 v-model="password"></input-text>
                     <div class="col text-center">
-                        <button type="button" class="btn-lg btn-psomocnik" @click="login()">Zaloguj</button>
+                        <button type="button" class="btn-lg btn-primary" @click="login()">Zaloguj</button>
                     </div>
                 </form>
             </div>
