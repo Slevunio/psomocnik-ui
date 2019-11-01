@@ -1,9 +1,9 @@
 <template>
     <div id="petInfo">
-        <div id="photos" class="carousel slide" data-ride="carousel">
+        <div id="photos" class="carousel slide" data-ride="carousel" v-if="pet.photosUrls.length > 0">
             <!--Indicators (w dolnej czesci karuzeli, pokazuja ilosc zdjec i na ktorym sie aktualnie znajduje)-->
             <ul class="carousel-indicators">
-                <li v-for="(photo, index) in pet.photos" data-target="#photos" data-slide-to="'index'"></li>
+                <li v-for="(photo, index) in pet.photosUrls" data-target="#photos" data-slide-to="'index'"></li>
             </ul>
             <!--pokaz slajdow-->
             <div class="carousel-inner">
@@ -29,7 +29,8 @@
             <br>
             <div style="margin-left: 10px">
                 <blockquote>
-                    <p class="mb-0">Cytowana wypowiedź któregoś z wolontariuszy opisująca ogólne odczucia wolontariusza względem zwierzaka, czy coś</p>
+                    <p class="mb-0">Cytowana wypowiedź któregoś z wolontariuszy opisująca ogólne odczucia wolontariusza
+                        względem zwierzaka, czy coś</p>
                     <footer class="blockquote-footer">Adam Karłowicz</footer>
                 </blockquote>
             </div>
@@ -45,7 +46,7 @@
                 </tr>
                 <tr>
                     <td class="td-left">Data przyjęcia</td>
-                    <td class="td-right">{{formattedDate}}</td>
+                    <td class="td-right">{{pet.takeInDate}}</td>
                 </tr>
                 <tr>
                     <td class="td-left">Wiek</td>
@@ -75,11 +76,13 @@
                     <td class="td-left">Sierść</td>
                     <td class="td-right">{{pet.fur}}</td>
                 </tr>
-                <tr style="border-bottom: none">
+                <tr>
                     <td class="td-left">Choroby</td>
-                    <td class="td-right"><span v-for="(disease, index) in pet.diseases"><span
-                            id="diseases">{{disease}}</span><span
-                            v-if="index!==pet.diseases.length-1">, </span></span></td>
+                    <td>{{pet.isIll}}</td>
+                </tr>
+                <tr v-if="pet.additionalNotes !== ''">
+                    <td class="td-left">Uwagi dodatkowe</td>
+                    <td>{{pet.additionalNotes}}</td>
                 </tr>
             </table>
         </div>
@@ -93,42 +96,29 @@
         name: "PetInfo",
         data() {
             return {
-                pet: '',
-                formattedDate: ''
+                pet: ''
             }
         },
         mounted() {
             this.readPet();
         },
-        beforeUpdate() {
-            this.formatDate();
-        },
+
         methods: {
             getPetId() {
                 var splitted = window.location.href.split('/');
                 return splitted[splitted.length - 1];
 
             },
-
             readPet() {
                 api.readPet(this.getPetId()).then(response => {
                     this.pet = response;
                 });
-            },
-
-            formatDate() {
-                var splitted = this.pet.takeInDate.split('T');
-                this.formattedDate = splitted[0];
             }
         }
     }
 </script>
 
 <style scoped>
-    /*.carousel-item {
-        width: 100%;
-        height: 400px;
-    }*/
     .pet-info-paragraph {
         display: inline-block;
         margin-bottom: 4px;
@@ -141,29 +131,8 @@
         height: 3px;
         background-color: #17a2b8;
     }
-
-    /*  table{
-          margin: auto;
-          text-align: center;
-          font-family: "Arial Rounded MT Bold";
-          font-size: 28px;
-
-      }
-      tr {
-          border-bottom: 2px solid #1e2226;
-
-      }
-      tr:hover{
-          background-color: rgba(30, 34, 38, 0.6);
-      }*/
-
-      .td-left {
-          font-weight: bold;
-      }
-/*
-      .td-right {
-          padding: 10px 50px 10px 50px;
-      }
-  */
+    .td-left {
+        font-weight: bold;
+    }
 
 </style>

@@ -147,7 +147,7 @@ export default {
             ;
     },
 
-    readDiseases() {
+/*    readDiseases() {
         return $.ajax({
             method: "GET",
             url: "/api/disease"
@@ -161,7 +161,7 @@ export default {
             url: "/api/photos/" + photoId
         })
     }
-    ,
+    ,*/
 
     findMatchedPets(form) {
         return $.ajax({
@@ -171,6 +171,18 @@ export default {
             headers: {
                 "Content-Type": "application/json"
             }
+        });
+    },
+
+    //////////////////////// VALIDATION ///////////////////////////
+
+    checkUsernameExists(username){
+        return $.ajax({
+           method: "GET",
+           url: "/api/checkUsernameExists",
+           data: {
+               username: username
+           }
         });
     }
 }

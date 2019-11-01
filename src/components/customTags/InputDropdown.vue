@@ -2,7 +2,7 @@
     <div>
         <h5 class="display-6 text-secondary">{{label}}</h5>
         <div class="form-group">
-            <select :class="myClass+' form-control'" v-model="choosedVal">
+            <select :class="valid+' form-control'" style="appearance: none;" v-model="choosedVal">
                 <option disabled value="" name="choose">Wybierz</option>
                 <option v-for="value in values">{{value}}</option>
             </select>
@@ -15,22 +15,23 @@
         name: "InputDropdown",
         props: {
             label: String,
-            values: Array,
-            myClass: String
+            values: Array
         },
 
         data() {
             return {
-                choosedVal: ''
+                choosedVal: '',
+                valid: ''
             }
         },
 
-        mounted(){
+        mounted() {
             $("option[name='choose']").hide();
         },
 
         watch: {
             choosedVal(val) {
+                this.valid = 'is-valid';
                 this.$emit('input', val);
             }
         }
