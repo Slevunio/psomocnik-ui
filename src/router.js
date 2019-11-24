@@ -20,7 +20,7 @@ Vue.use(Router);
 const router = new Router({
     mode: 'history', // uris without hashes #, see https://router.vuejs.org/guide/essentials/history-mode.html#html5-history-mode
     routes: [
-        {path: '/', component: Home},
+        { path: '/', component: Home },
         {
             path: '/manageUsers', component: ManageUsers,
             beforeEnter: (to, from, next) => {
@@ -55,7 +55,16 @@ const router = new Router({
                 }
             }
         },
-        {path: '/login', component: Login},
+        {
+            path: '/login', component: Login, beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('role') !== null && localStorage.getItem('role') !== 'undefined') {
+                    next("/");
+                }
+                else {
+                    next();
+                }
+            }
+        },
         {
             path: '/managePets', component: ManagePets, beforeEnter: (to, from, next) => {
                 if (localStorage.getItem('role') === 'ADMIN' || localStorage.getItem('role') === 'MODERATOR') {
@@ -91,26 +100,37 @@ const router = new Router({
         },
         {
             path: '/matchedPets', component: MatchedPets, beforeEnter: (to, from, next) => {
-                if(localStorage.getItem('form') !== null && localStorage.getItem('form') !== 'undefined'){
+                if (localStorage.getItem('form') !== null && localStorage.getItem('form') !== 'undefined') {
                     next();
                 }
-                else{
+                else {
                     next("/findPet");
                 }
             }
         },
-        {path: '/register', component: Register},
-        {path: '/ourPets', component: OurPets},
-        {path: '/petInfo/:petId', component: PetInfo, name: 'petInfo'},
-        {path: '/findPet', component: FindPet, beforeEnter:(to, from, next)=>{
-                if(localStorage.getItem('form') !== null && localStorage.getItem('form') !== 'undefined'){
-                    next("/matchedPets");
-                }
-                else{
+        {
+            path: '/register', component: Register, beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('role') !== null && localStorage.getItem('role') !== 'undefined') {
                     next();
                 }
-            }},
-        {path: '/contact', component: Contact}
+                else {
+                    next("/");
+                }
+            }
+        },
+        { path: '/ourPets', component: OurPets },
+        { path: '/petInfo/:petId', component: PetInfo, name: 'petInfo' },
+        {
+            path: '/findPet', component: FindPet, beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('form') !== null && localStorage.getItem('form') !== 'undefined') {
+                    next("/matchedPets");
+                }
+                else {
+                    next();
+                }
+            }
+        },
+        { path: '/contact', component: Contact }
 
 
     ]

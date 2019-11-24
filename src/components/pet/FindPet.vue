@@ -44,9 +44,9 @@
                                         v-model="form.activity"></input-dropdown>
                             </div>
                             <input-dropdown label="Czy mógłbyś/mogłabyś zaopiekować się chorym zwierzakiem?"
-                                            id="diseases"
+                                            id="isIll"
                                             :values="['Tak', 'Nie']"
-                                            v-model="form.diseases"></input-dropdown>
+                                            v-model="form.isIll"></input-dropdown>
                             <input-dropdown label="Jakie umaszczenie zwierzaka preferujesz?" id="coat"
                                             :values="['Podpalane', 'Białe', 'Czarne']"
                                             v-model="form.coat"></input-dropdown>
@@ -90,7 +90,7 @@
                     canLiveWithOtherCats: '',
                     canLiveWithKids: '',
                     activity: '',
-                    diseases: '',
+                    isIll: '',
                     coat: '',
                     fur: ''
                 },

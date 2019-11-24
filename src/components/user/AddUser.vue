@@ -14,7 +14,7 @@
               placeholder="Wprowadź nazwę użytkownika"
               :valid="validation.username.valid"
               :error="validation.username.error"
-              @input="debounceUsername"              
+              @input="debounceUsername"
               v-model="usernameBuffer"
             ></input-text>
             <input-text
@@ -23,31 +23,35 @@
               label="Email"
               placeholder="Wprowadź adres email"
               @input="debounceEmail"
-              v-model="user.email"
+              v-model="emailBuffer"
               :valid="validation.email.valid"
               :error="validation.email.error"
             ></input-text>
             <input-dropdown
               label="Rola użytkownika"
-              :values="roles"
-              v-model="user.role"
-              :valid="validation.role"
+              :values="roles.roleNames"
+              @input="setRole"
+              :defaultValue="'USER'"
             ></input-dropdown>
             <input-text
               type="password"
               name="password"
               label="Hasło"
               placeholder="Wprowadź hasło"
-              v-model="user.password"
-              :valid="validation.password"
+              @input="debouncePassword"
+              v-model="passwordBuffer"
+              :valid="validation.password.valid"
+              :error="validation.password.error"
             ></input-text>
             <input-text
               type="password"
               name="confirmPassword"
               label="Potwierdź hasło"
               placeholder="Wprowadź ponownie hasło"
-              v-model="user.confirmPassword"
-              :valid="validation.confirmPassword"
+              v-model="confirmPasswordBuffer"
+              @input="debounceConfirmPassword"
+              :valid="validation.confirmPassword.valid"
+              :error="validation.confirmPassword.error"
             ></input-text>
           </div>
           <div class="col text-center">
@@ -87,21 +91,38 @@ export default {
       },
       validation: {
         username: {
-            valid: "",
-            error: ""
+          valid: "",
+          error: ""
         },
         email: {
-            valid: "",
-            error: ""
+          valid: "",
+          error: ""
         },
-        role: "",
-        password: "",
-        confirmPassword: ""
+        password: {
+          valid: "",
+          error: ""
+        },
+        confirmPassword: {
+          valid: "",
+          error: ""
+        }
       },
+      roles: {
+        roles: [],
+        roleNames: []
+      },
+      emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       usernameBuffer: "", //for debounce purposes
       emailBuffer: "", //for debounce purposes
-      roles: [],
-      isSubmitButtonDisabled: true
+      passwordBuffer: "",
+      confirmPasswordBuffer: "", //for debounce purposes
+      isSubmitButtonDisabled: true,
+      validationFunctions: [
+        this.validateUsername,
+        this.validateEmail,
+        this.validatePassword,
+        this.validateConfirmPassword
+      ]
     };
   },
 
@@ -112,12 +133,16 @@ export default {
   methods: {
     readRoles() {
       api.readRoles().then(response => {
+        this.roles.roles = response;
         for (let index in response) {
-          this.roles.push(response[index].name);
+          this.roles.roleNames.push(response[index].name);
         }
+        //set default user role for USER
+        this.user.role = this.roles.roles[2];
       });
     },
     createUser() {
+      this.$delete(this.user, "confirmPassword");
       api.createUser(this.user).then(response => {
         document.location.replace("/manageUsers");
       });
@@ -128,48 +153,124 @@ export default {
     setEmail() {
       this.user.email = this.emailBuffer;
     },
+    setRole(val) {
+      for (let index in this.roles.roles) {
+        if (this.roles.roles[index].name === val) {
+          this.user.role = this.roles.roles[index];
+        }
+      }
+    },
+    setPassword() {
+      this.user.password = this.passwordBuffer;
+    },
+    setConfirmPassword() {
+      this.user.confirmPassword = this.confirmPasswordBuffer;
+    },
     debounceUsername: _.debounce(function() {
       this.setUsername();
     }, 500),
     debounceEmail: _.debounce(function() {
       this.setEmail();
     }, 500),
+    debouncePassword: _.debounce(function() {
+      this.setPassword();
+    }, 500),
+    debounceConfirmPassword: _.debounce(function() {
+      this.setConfirmPassword();
+    }, 500),
     validateForm(user) {
-      this.validateUsername(user.username);
-      this.validateEmail(user.email);
+      for(let i = 0; i < this.validationFunctions.length; i++){
+        this.validationFunctions[i](user);
+      }
+      for(let field in this.validation){
+        if(this.validation[field].valid === 'is-invalid' || this.validation[field].valid === ''){          
+          this.isSubmitButtonDisabled = true;
+          return;
+        }
+      }
+      this.isSubmitButtonDisabled = false;     
     },
 
-    validateUsername(username) {
-      if (username.length !== 0) {
-        if (username.length >= 3) {
-          api.checkUsernameExists(username).then(response => {
+    validateUsername(user) {
+      if (user.username.length !== 0) {
+        if (user.username.length >= 3) {
+          api.checkUsernameExists(user.username).then(response => {
             if (response) {
               this.validation.username.valid = "is-invalid";
-              this.validation.username.error = "Username already exists!";
+              this.validation.username.error =
+                "Użytkownik o podanej nazwie już istnieje!";
+              return false;
             } else {
               this.validation.username.valid = "is-valid";
+              return true;
             }
           });
-        }
-        else{
-            this.validation.username.valid = "is-invalid";
-            this.validation.username.error = "Username has to be atleast 3 characters long!";
+        } else {
+          this.validation.username.valid = "is-invalid";
+          this.validation.username.error =
+            "Nazwa użytkownika musi się składać z conajmniej 3 znaków!";
+          return false;
         }
       } else {
         this.validation.username.valid = "";
+        return false;
       }
     },
 
-    validateEmail(email) {
-      if (email.length !== 0) {
-        if (isEmailFormatValid()) {
-          //validateFormat
+    validateEmail(user) {
+      if (user.email.length !== 0) {
+        if (this.emailRegex.test(user.email)) {
+          api.checkEmailExists(user.email).then(response => {
+            if (response) {
+              this.validation.email.valid = "is-invalid";
+              this.validation.email.error = "Podany email już istnieje!";
+              return false;
+            } else {
+              this.validation.email.valid = "is-valid";
+              return true;
+            }
+          });
         } else {
-          //format invalid
+          this.validation.email.valid = "is-invalid";
+          this.validation.email.error = "Nieprawidłowy format adresu email!";
+          return false;
         }
-        //validate
       } else {
         this.validation.email.valid = "";
+        return false;
+      }
+    },
+
+    validatePassword(user) {
+      if (user.password.length !== 0) {
+        if (user.password.length < 8) {
+          this.validation.password.valid = "is-invalid";
+          this.validation.password.error =
+            "Hasło musi się składać z conajmniej 8 znaków!";
+          return false;
+        } else {
+          this.validation.password.valid = "is-valid";
+          return true;
+        }
+      } else {
+        this.validation.password.valid = "";
+        return false;
+      }
+    },
+
+    validateConfirmPassword(user) {
+      if (user.confirmPassword.length !== 0) {
+        if (user.confirmPassword !== this.user.password) {
+          this.validation.confirmPassword.valid = "is-invalid";
+          this.validation.confirmPassword.error = "Hasła muszą być takie same!";
+          return false;
+        } else {
+          this.validation.confirmPassword.valid = "is-valid";
+          return true;
+        }
+      } else {
+        this.validation.confirmPassword.valid = "";
+        return false;
       }
     }
   },

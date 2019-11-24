@@ -184,6 +184,15 @@ export default {
                username: username
            }
         });
+    },
+    checkEmailExists(email){
+        return $.ajax({
+           method: "GET",
+           url: "/api/checkEmailExists",
+           data: {
+               email: email
+           }
+        });
     }
 }
 

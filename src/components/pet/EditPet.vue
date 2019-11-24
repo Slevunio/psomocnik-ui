@@ -2,107 +2,154 @@
     <div>
         <div class="container-fluid" style="margin-top:50px;" id="pet">
             <div class="container">
-                <h1 class="display-3">Edytuj zwierzę</h1>
+                <h1 class="display-3 text-center">Edytuj zwierzę</h1>
                 <br>
-
                 <table class="table table-light">
-                    <thead class="thead-dark">
-                    <tr class="text-center">
-                        <th>
-                            Imię
-                        </th>
-                        <th>
-                            Data przyjęcia
-                        </th>
-                        <th>
-                            Gatunek
-                        </th>
-                        <th>
-                            Płeć
-                        </th>
-                        <th>
-                            Wiek
-                        </th>
-                        <th>
-                            Może mieszkać z innymi psami
-                        </th>
-                        <th>
-                            Może mieszkać z innymi kotami
-                        </th>
-                        <th>
-                            Może mieszkać z dziećmi
-                        </th>
-                        <th>
-                            Aktywność (skala 1-10)
-                        </th>
-                        <th>
-                            Umaszczenie
-                        </th>
-                        <th>
-                            Sierść
-                        </th>
-                        <th>
-                            Choroby
-                        </th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>
+                                Imię
+                            </th>
+                            <td id="name">
+                                {{pet.name}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="name"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Data przyjęcia
+                            </th>
+                            <td id="takeInDate">
+                                {{pet.takeInDate}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="takeInDate"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Gatunek
+                            </th>
+                            <td id="species">
+                                {{pet.species}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="species"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Płeć
+                            </th>
+                            <td id="sex">
+                                {{pet.sex}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="sex"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Wiek
+                            </th>
+                            <td id="age">
+                                {{pet.age}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="age"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Może mieszkać z innymi psami
+                            </th>
+                            <td id="canLiveWithOtherDogs">
+                                {{pet.canLiveWithOtherDogs}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="canLiveWithOtherDogs"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Może mieszkać z innymi kotami
+                            </th>
+                            <td id="canLiveWithOtherCats">
+                                {{pet.canLiveWithOtherCats}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="canLiveWithOtherCats"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Może mieszkać z dziećmi
+                            </th>
+                            <td id="canLiveWithKids">
+                                {{pet.canLiveWithKids}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="canLiveWithKids"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Aktywność (skala 1-10)
+                            </th>
+                            <td id="activity">
+                                {{pet.activity}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="activity"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Umaszczenie
+                            </th>
+                            <td id="coat">
+                                {{pet.coat}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="coat"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Długość sierści
+                            </th>
+                            <td id="fur">
+                                {{pet.fur}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="fur"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Czy jest chory?
+                            </th>
+                            <td id="isIll">
+                                {{pet.isIll}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="isIll"></edit-pet-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Uwagi dodatkowe
+                            </th>
+                            <td id="additionalNotes">
+                                {{pet.additionalNotes}}
+                            </td>
+                            <td>
+                                <edit-pet-button elementid="additionalNotes"></edit-pet-button>
+                            </td>
+                        </tr>
                     </thead>
-                    <tbody class="bg-light">
-                    <tr class="text-center">
-                        <td id="name">{{pet.name}}</td>
-                        <td id="takeInDate">{{pet.takeInDate}}</td>
-                        <td id="species">{{pet.species}}</td>
-                        <td id="sex">{{pet.sex}}</td>
-                        <td id="age">{{pet.age}}</td>
-                        <td id="canLiveWithOtherDogs">{{pet.canLiveWithOtherDogs}}</td>
-                        <td id="canLiveWithOtherCats">{{pet.canLiveWithOtherCats}}</td>
-                        <td id="canLiveWithKids">{{pet.canLiveWithKids}}</td>
-                        <td id="activity">{{pet.activity}}</td>
-                        <td id="coat">{{pet.coat}}</td>
-                        <td id="fur">{{pet.fur}}</td>
-                        <td><span v-for="(disease, index) in pet.diseases"><span
-                                id="diseases">{{disease}}</span><span
-                                v-if="index!==pet.diseases.length-1">, </span></span></td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>
-
-                            <edit-pet-button elementid="name"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="takeInDate"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="species"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="sex"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="age"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="canLiveWithOtherDog"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="canLiveWithOtherCats"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="canLiveWithKids"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="activity"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="coat"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="fur"></edit-pet-button>
-                        </td>
-                        <td>
-                            <edit-pet-button elementid="diseases"></edit-pet-button>
-                        </td>
-                    </tr>
-                    </tbody>
                 </table>
                 <div class="col-12 text-center">
                     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
@@ -195,6 +242,7 @@
             getPet() {
                 api.readPet(this.getPetId()).then(response => {
                     this.pet = response;
+                    console.log(JSON.stringify(response));
                 });
             },
             getPetId() {
@@ -206,7 +254,7 @@
                 this.setDefaultInputValue();
             },
             setDefaultInputValue() {
-                document.getElementById("editInput").value = document.getElementById(this.elementId).innerHTML;
+                document.getElementById("editInput").value = document.getElementById(this.elementId).innerHTML.trim();
             },
             editValue() {
                 var newValue = document.getElementById("editInput").value;
@@ -223,5 +271,7 @@
 </script>
 
 <style scoped>
-
+td {
+    vertical-align: bottom;
+}
 </style>

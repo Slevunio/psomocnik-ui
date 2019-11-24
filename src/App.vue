@@ -27,7 +27,7 @@
                             </span>
                         </li>
                     </div>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="role===null || role==='undefined'">
                         <router-link class="nav-link" to="/register">Zarejestruj</router-link>
                     </li>
                     <div v-if="role==='ADMIN'">
@@ -62,8 +62,7 @@
                 this.role = localStorage.getItem('role');
             },
             logout() {
-                localStorage.removeItem('token');
-                localStorage.removeItem('role');
+                localStorage.clear();
                 document.location.replace("/");
             }
         }
