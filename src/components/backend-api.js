@@ -119,14 +119,16 @@ export default {
         })
     },
 
-    updatePet(petId, pet) {
+    updatePet(formData, petId) {
         return $.ajax({
             method: "PUT",
             url: "/api/pet/" + petId,
-            data: JSON.stringify(pet),
+            data: formData,
+            processData: false,
+            contentType: false,
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
-                "Content-Type": "application/json"
+                boundary: '----WebKitFormBoundary7MA4YWxkTrZu0gW'
             }
         });
     },

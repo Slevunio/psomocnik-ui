@@ -111,10 +111,10 @@ const router = new Router({
         {
             path: '/register', component: Register, beforeEnter: (to, from, next) => {
                 if (localStorage.getItem('role') !== null && localStorage.getItem('role') !== 'undefined') {
-                    next();
+                    next("/");
                 }
                 else {
-                    next("/");
+                    next();
                 }
             }
         },

@@ -29,9 +29,7 @@
             <br>
             <div style="margin-left: 10px">
                 <blockquote>
-                    <p class="mb-0">Cytowana wypowiedź któregoś z wolontariuszy opisująca ogólne odczucia wolontariusza
-                        względem zwierzaka, czy coś</p>
-                    <footer class="blockquote-footer">Adam Karłowicz</footer>
+                    <p class="mb-0">{{pet.additionalNotes}}</p>                    
                 </blockquote>
             </div>
             <br>
@@ -80,10 +78,10 @@
                     <td class="td-left">Choroby</td>
                     <td>{{pet.isIll}}</td>
                 </tr>
-                <tr v-if="pet.additionalNotes !== ''">
+                <!--<tr v-if="pet.additionalNotes !== ''">
                     <td class="td-left">Uwagi dodatkowe</td>
                     <td>{{pet.additionalNotes}}</td>
-                </tr>
+                </tr>-->
             </table>
         </div>
     </div>

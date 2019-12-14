@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="btn btn-primary" @click="setElementId(elementid)" data-toggle="modal"
+    <button type="button" class="btn btn-primary" @click="setElementIdAndGetDefaultInputValue(elementid)" data-toggle="modal"
             data-target="#editModal">
         Edytuj
     </button>
@@ -12,9 +12,10 @@
             'elementid'
         ],
         methods:{
-            setElementId(elementid){
+            setElementIdAndGetDefaultInputValue(elementid){
                 this.$parent.setElementId(elementid);
-            }
+                this.$parent.getDefaultInputValue();
+            },
         }
     }
 </script>

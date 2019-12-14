@@ -69,16 +69,14 @@
 
 <script>
     import InputDropdown from "../customTags/InputDropdown"
-    import InputText from "../customTags/InputText"
-    import PetCard from "../customTags/PetCard"
+    import InputText from "../customTags/InputText"    
     import api from "../backend-api"
 
     export default {
         name: "FindPet",
         components: {
             InputText,
-            InputDropdown,
-            PetCard
+            InputDropdown
         },
         data() {
             return {

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h5 class="display-6 text-secondary">{{label}}</h5>
+        <h5 class="display-6 text-secondary">{{label}}</h5>        
         <div class="form-group">
-            <select :class="valid+' form-control'" style="appearance: none;" v-model="choosedVal">
+            <select :class="valid+' form-control'" style="appearance: none;" v-model="choosed">
                 <option v-for="value in values">{{value}}</option>
             </select>
         </div>
@@ -12,21 +12,30 @@
 <script>
     export default {
         name: "InputDropdown",
-        props: {
-            label: String,
-            values: Array,
-            defaultValue: String
-        },
+        props: [
+            'label',
+            'values',
+            'defaultVal'
+        ],
 
         data() {
             return {
-                choosedVal: '',
-                valid: ''
+                valid: '',
+                choosedVal: ''
             }
         },
-        mounted(){
-            this.choosedVal = this.defaultValue;
+
+        computed:{
+            choosed:{
+                get(){
+                    return(this.choosedVal === '' ? this.defaultVal : this.choosedVal)
+                },
+                set(value){
+                    this.choosedVal = value;
+                }
+            }
         },
+
         watch: {
             choosedVal(val) {
                 this.$emit('input', val);

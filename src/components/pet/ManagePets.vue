@@ -50,8 +50,8 @@
                         <button class="btn btn-info btn-lg">Dodaj</button>
                     </router-link>
                 </div>
-                <div class="col-sm-6 text-center">
-                    <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#deleteModal">Usuń</button>
+                <div class="col-sm-6 text-center">                    
+                    <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#deleteModal" :disabled="checkedPets.length === 0">Usuń</button>
                 </div>
             </div>
         </div>
