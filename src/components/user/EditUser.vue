@@ -64,19 +64,15 @@
               <div class="modal-body text-center">
                 <h4>Zatwierdzić zmiany?</h4>
               </div>
-              <div class="modal-footer">
-                <div class="col-6 text-center">
+              <div class="modal-footer">                
                   <button
                     type="button"
                     class="btn btn-primary"
                     id="editUserModalSubmit"
                     data-dismiss="modal"
                     @click.capture="editUser()"
-                  >Ok</button>
-                </div>
-                <div class="col-6 text-center">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Anuluj</button>
-                </div>
+                  >Ok</button>                               
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Anuluj</button>                
               </div>
             </div>
           </div>

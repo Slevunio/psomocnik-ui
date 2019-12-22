@@ -61,16 +61,12 @@
                     <div class="modal-body text-center">
                         <h4>Usunąć?</h4>
                     </div>
-                    <div class="modal-footer">
-                        <div class="col-6 text-center">
+                    <div class="modal-footer">                       
                             <button type="button" class="btn btn-success" data-dismiss="modal"
                                     @click.capture="deletePets()">Ok
-                            </button>
-                        </div>
-                        <div class="col-6 text-center">
+                            </button>                                               
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Anuluj
-                            </button>
-                        </div>
+                            </button>                        
                     </div>
                 </div>
             </div>

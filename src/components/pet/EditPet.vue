@@ -167,18 +167,14 @@
               <div class="modal-body text-center">
                 <h4>Zatwierdzić zmiany?</h4>
               </div>
-              <div class="modal-footer">
-                <div class="col-6 text-center">
+              <div class="modal-footer text-center">
                   <button
                     type="submit"
                     class="btn btn-primary"
                     v-on:click.capture="editPet()"
                     data-dismiss="modal"
-                  >Ok</button>
-                </div>
-                <div class="col-6 text-center">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Anuluj</button>
-                </div>
+                  >Ok</button>                                
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Anuluj</button>                
               </div>
             </div>
           </div>
