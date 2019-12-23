@@ -12,7 +12,7 @@
           v-for="(photo, index) in pet.photosUrls"
           :class="{active: index==0}"
         >
-          <img :src="photo" class="img-fluid" />
+          <img :src="photo"/>
         </div>
       </div>
       <!--Strzalki w lewo/prawo-->
