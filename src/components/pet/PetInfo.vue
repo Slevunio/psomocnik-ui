@@ -1,33 +1,29 @@
 <template>
   <div id="petInfo">
-    <div class="carousel-wrapper">
-      <div class="carousel slide" data-ride="carousel" v-if="pet.photosUrls.length > 0">
-        <!--Indicators (w dolnej czesci karuzeli, pokazuja ilosc zdjec i na ktorym sie aktualnie znajduje)-->
-        <ul class="carousel-indicators">
-          <li
-            v-for="(photo, index) in pet.photosUrls"
-            data-target="#photos"
-            data-slide-to="'index'"
-          ></li>
-        </ul>
-        <!--pokaz slajdow-->
-        <div class="carousel-inner">
-          <div
-            class="carousel-item"
-            v-for="(photo, index) in pet.photosUrls"
-            :class="{active: index==0}"
-          >
+    <div class="carousel slide" data-ride="carousel" v-if="pet.photosUrls.length > 0">
+      <!--Indicators (w dolnej czesci karuzeli, pokazuja ilosc zdjec i na ktorym sie aktualnie znajduje)-->
+      <ul class="carousel-indicators">
+        <li v-for="(photo, index) in pet.photosUrls" data-target="#photos" data-slide-to="'index'"></li>
+      </ul>
+      <!--pokaz slajdow-->
+      <div class="carousel-inner">
+        <div
+          class="carousel-item"
+          v-for="(photo, index) in pet.photosUrls"
+          :class="{active: index==0}"
+        >
+          <div class="petImg">
             <img :src="photo" class="img-fluid" />
           </div>
         </div>
-        <!--Strzalki w lewo/prawo-->
-        <a class="carousel-control-prev" href="#photos" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#photos" role="button" data-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </a>
       </div>
+      <!--Strzalki w lewo/prawo-->
+      <a class="carousel-control-prev" href="#photos" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#photos" role="button" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
     </div>
     <div class="container">
       <br />
@@ -141,8 +137,7 @@ export default {
 .td-left {
   font-weight: bold;
 }
-.carousel-wrapper {
-  padding: 0, 2px;
-  max-height: 850px;
+.petImg {
+  max-height: 800px;
 }
 </style>

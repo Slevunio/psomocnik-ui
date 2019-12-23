@@ -35,7 +35,7 @@ a {
   color: #6c757d;
 }
 .petImage {
-  max-width: 300px;
-  max-height: 400px;
+  width: 300px;
+  height: 400px;
 }
 </style>
