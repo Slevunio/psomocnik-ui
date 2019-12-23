@@ -12,9 +12,7 @@
           v-for="(photo, index) in pet.photosUrls"
           :class="{active: index==0}"
         >
-          <div class="petImg">
-            <img :src="photo" class="img-fluid" />
-          </div>
+          <img :src="photo" class="img-fluid" />
         </div>
       </div>
       <!--Strzalki w lewo/prawo-->
@@ -137,8 +135,8 @@ export default {
 .td-left {
   font-weight: bold;
 }
-.petImg{
-    max-height: 800px;
-    background-size: contain;
+.petImg {
+  max-height: 800px;
+  background-size: contain;
 }
 </style>
