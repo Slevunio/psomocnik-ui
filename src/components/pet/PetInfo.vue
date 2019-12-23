@@ -1,6 +1,6 @@
 <template>
   <div id="petInfo">
-    <div class="carousel slide" data-ride="carousel" v-if="pet.photosUrls.length > 0">
+    <div id="photos" class="carousel slide" data-ride="carousel" v-if="pet.photosUrls.length > 0">
       <!--Indicators (w dolnej czesci karuzeli, pokazuja ilosc zdjec i na ktorym sie aktualnie znajduje)-->
       <ul class="carousel-indicators">
         <li v-for="(photo, index) in pet.photosUrls" data-target="#photos" data-slide-to="'index'"></li>
