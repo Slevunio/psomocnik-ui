@@ -15,37 +15,42 @@
           <input-dropdown
             label="Gatunek"
             name="species"
-            :values="['Pies', 'Kot']"
+            :values="editPetPredefinedValues.SPECIES"
             v-model="pet.species"
           ></input-dropdown>
-          <input-dropdown label="Płeć" name="sex" :values="['Męska', 'Żeńska']" v-model="pet.sex"></input-dropdown>
+          <input-dropdown
+            label="Płeć"
+            name="sex"
+            :values="editPetPredefinedValues.SEX"
+            v-model="pet.sex"
+          ></input-dropdown>
           <input-dropdown
             label="Wiek"
             name="age"
-            :values="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]"
+            :values="editPetPredefinedValues.AGE"
             v-model="pet.age"
           ></input-dropdown>
           <input-dropdown
             label="Czy może mieszkać z innymi psami"
             name="canLiveWithOtherDogs"
-            :values="['Tak', 'Nie']"
+            :values="editPetPredefinedValues.CAN_LIVE_WITH_OTHER_DOGS"
             v-model="pet.canLiveWithOtherDogs"
           ></input-dropdown>
           <input-dropdown
             label="Czy może mieszkać z innymi Kotami"
             name="canLiveWithOtherCats"
-            :values="['Tak', 'Nie']"
+            :values="editPetPredefinedValues.CAN_LIVE_WITH_OTHER_CATS"
             v-model="pet.canLiveWithOtherCats"
           ></input-dropdown>
           <input-dropdown
             label="Czy może mieszkać z dziećmi"
             name="canLiveWithKids"
-            :values="['Tak', 'Nie']"
+            :values="editPetPredefinedValues.CAN_LIVE_WITH_KIDS"
             v-model="pet.canLiveWithKids"
           ></input-dropdown>
           <input-dropdown
             label="Aktywność w skali 1-10 (1 - nieaktywny, 10 - bardzo aktywny)"
-            :values="[1,2,3,4,5,6,7,8,9,10]"
+            :values="editPetPredefinedValues.ACTIVITY"
             name="activity"
             v-model="pet.activity"
           ></input-dropdown>
@@ -53,14 +58,19 @@
             label="Umaszczenie"
             name="coat"
             placeholder="Umaszczenie"
-            :values="['Podpalane', 'Białe', 'Czarne']"
+            :values="editPetPredefinedValues.COAT"
             v-model="pet.coat"
           ></input-dropdown>
-          <input-dropdown label="Sierść" name="fur" :values="['Długa', 'Krótka']" v-model="pet.fur"></input-dropdown>
           <input-dropdown
-            label="Choroby"
-            name="diseases"
-            :values="['Tak', 'Nie']"
+            label="Sierść"
+            name="fur"
+            :values="editPetPredefinedValues.FUR"
+            v-model="pet.fur"
+          ></input-dropdown>
+          <input-dropdown
+            label="Czy jest chory?"
+            name="isIll"
+            :values="editPetPredefinedValues.IS_ILL"
             v-model="pet.isIll"
           ></input-dropdown>
           <div class="form-group">
@@ -111,6 +121,7 @@ import api from "../backend-api";
 import InputText from "../customTags/InputText";
 import InputDropdown from "../customTags/InputDropdown";
 import DatePicker from "../customTags/DatePicker";
+import petAttributes from "../../constants/PetAttributes";
 
 export default {
   name: "AddPet",
@@ -136,6 +147,7 @@ export default {
         isIll: "",
         additionalNotes: ""
       },
+      editPetPredefinedValues: petAttributes,
       photos: [],
       photosUrls: [],
       isSubmitButtonDisabled: "true"
@@ -169,6 +181,7 @@ export default {
 
     createPet() {
       let formData = new FormData();
+      this.pet.age = this.pet.age === "<1" ? "0" : this.pet.age;
       for (let item in this.pet) {
         formData.append(item, this.pet[item]);
       }
@@ -182,9 +195,6 @@ export default {
     }
   },
   watch: {
-    /*
-            Validate form every time pet object changes
-            */
     pet: {
       handler(val) {
         this.validateForm();

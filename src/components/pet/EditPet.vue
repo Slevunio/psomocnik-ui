@@ -168,13 +168,13 @@
                 <h4>Zatwierdzić zmiany?</h4>
               </div>
               <div class="modal-footer text-center">
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    v-on:click.capture="editPet()"
-                    data-dismiss="modal"
-                  >Ok</button>                                
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Anuluj</button>                
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  v-on:click.capture="editPet()"
+                  data-dismiss="modal"
+                >Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Anuluj</button>
               </div>
             </div>
           </div>
@@ -185,20 +185,15 @@
 </template>
 
 <script>
-import EditPetButton from "../customTags/EditPetButton";
-import EditPetModal from "../customTags/EditPetModal";
 import api from "../backend-api";
 import datePicker from "../customTags/DatePicker";
 import InputText from "../customTags/InputText";
 import InputDropdown from "../customTags/InputDropdown";
-import editPetModalTypeEnum from "../../constants/EditPetModalTypeEnum";
-import editPetModalValues from "../../constants/EditPetModalValues";
+import petAttributes from "../../constants/PetAttributes";
 
 export default {
   name: "EditPet",
-  components: {
-    EditPetButton,
-    EditPetModal,
+  components: {    
     datePicker,
     InputText,
     InputDropdown
@@ -209,7 +204,7 @@ export default {
       pet: "",
       addedPhotos: [],
       addedPhotosUrls: [],
-      editPetPredefinedValues: editPetModalValues,
+      editPetPredefinedValues: petAttributes,
       isSubmitButtonDisabled: "true"
     };
   },
@@ -229,6 +224,8 @@ export default {
     },
     editPet() {
       let formData = new FormData();
+      this.pet.age = this.pet.age === "<1" ? "0" : this.pet.age;
+
       formData.append("pet", JSON.stringify(this.pet));
       for (let i = 0; i < this.addedPhotos.length; i++) {
         formData.append("addedPhotos", this.addedPhotos[i]);
@@ -264,7 +261,7 @@ export default {
         }
       }
       this.isSubmitButtonDisabled = false;
-    },
+    }
   },
   watch: {
     /*
