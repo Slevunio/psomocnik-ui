@@ -34,7 +34,8 @@ export default {
 a {
   color: #6c757d;
 }
-.petImage {
+
+.card-img, .card-img-top{
   width: 300px;
   height: 400px;
 }

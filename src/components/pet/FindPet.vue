@@ -7,10 +7,10 @@
                 <form id="findPet" @submit.prevent="setFormToLocalStorage()">
                     <div class="row">
                         <div class="col-sm-6">
-                            <input-dropdown label="Szukasz psa czy kota?" id="species" :values="['Pies', 'Kot']"
+                            <input-dropdown label="Szukasz psa czy kota?" id="species" :values="editPetPredefinedValues.SPECIES"
                                             v-model="form.species"></input-dropdown>
                             <input-dropdown label="Jakiej płci ma być Twój towarzysz?" id="sex"
-                                            :values="['Męska', 'Żeńska']"
+                                            :values="editPetPredefinedValues.SEX"
                                             v-model="form.sex"></input-dropdown>
                             <div v-if="form.species==='Pies'">
                                 <input-dropdown label="W jakim wieku ma być Twój pies?" id="ageDog"
@@ -23,13 +23,13 @@
                                                 v-model="form.age"></input-dropdown>
                             </div>
                             <input-dropdown label="Czy jesteś właścicielem/właścicielką psa?" id="canLiveWithOtherDogs"
-                                            :values="['Tak', 'Nie']"
+                                            :values="editPetPredefinedValues.CAN_LIVE_WITH_OTHER_DOGS"
                                             v-model="form.canLiveWithOtherDogs"></input-dropdown>
                             <input-dropdown label="Czy jesteś właścicielem/właścicielką kota?" id="canLiveWithOtherCats"
-                                            :values="['Tak', 'Nie']"
+                                            :values="editPetPredefinedValues.CAN_LIVE_WITH_OTHER_CATS"
                                             v-model="form.canLiveWithOtherCats"></input-dropdown>
                             <input-dropdown label="Czy w Twoim domu znajdują się dzieci?" id="canLiveWithKids"
-                                            :values="['Tak', 'Nie']"
+                                            :values="editPetPredefinedValues.CAN_LIVE_WITH_KIDS"
                                             v-model="form.canLiveWithKids"></input-dropdown>
                             <div v-if="form.species==='Pies'">
                                 <input-dropdown
@@ -45,12 +45,12 @@
                             </div>
                             <input-dropdown label="Czy mógłbyś/mogłabyś zaopiekować się chorym zwierzakiem?"
                                             id="isIll"
-                                            :values="['Tak', 'Nie']"
+                                            :values="editPetPredefinedValues.IS_ILL"
                                             v-model="form.isIll"></input-dropdown>
                             <input-dropdown label="Jakie umaszczenie zwierzaka preferujesz?" id="coat"
-                                            :values="['Podpalane', 'Białe', 'Czarne']"
+                                            :values="editPetPredefinedValues.COAT"
                                             v-model="form.coat"></input-dropdown>
-                            <input-dropdown label="Długa sierść, czy krótka?" id="fur" :values="['Długa', 'Krótka']"
+                            <input-dropdown label="Długa sierść, czy krótka?" id="fur" :values="editPetPredefinedValues.FUR"
                                             v-model="form.fur"></input-dropdown>
                             <br>
                         </div>
@@ -71,6 +71,7 @@
     import InputDropdown from "../customTags/InputDropdown"
     import InputText from "../customTags/InputText"    
     import api from "../backend-api"
+    import petAttributes from "../../constants/PetAttributes";
 
     export default {
         name: "FindPet",
@@ -92,6 +93,7 @@
                     coat: '',
                     fur: ''
                 },
+                editPetPredefinedValues: petAttributes,
                 isSubmitButtonDisabled: true
             }
         },
