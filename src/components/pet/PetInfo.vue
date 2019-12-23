@@ -137,7 +137,8 @@ export default {
 .td-left {
   font-weight: bold;
 }
-.petImg {
-  max-height: 800px;
+.petImg{
+    max-height: 800px;
+    background-size: contain;
 }
 </style>
