@@ -135,7 +135,8 @@ export default {
 .td-left {
   font-weight: bold;
 }
-.carousel-inner {
-  max-height: 800px !important;
+img {
+    width: 100%;
+    height: 800px;
 }
 </style>
