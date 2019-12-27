@@ -135,35 +135,32 @@ export default {
 
     deletePets(petsIds) {
         return $.ajax({
-                method: "DELETE",
-                url: "/api/pet",
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token"),
-                },
-                data: {
-                    ids: JSON.stringify(petsIds)
+            method: "DELETE",
+            url: "/api/pet",
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            data: {
+                ids: JSON.stringify(petsIds)
 
-                }
             }
+        }
         )
             ;
     },
 
-/*    readDiseases() {
+    deletePhoto(id) {
         return $.ajax({
-            method: "GET",
-            url: "/api/disease"
-        })
-    }
-    ,
-
-    readPhoto(photoId) {
-        return $.ajax({
-            method: "GET",
-            url: "/api/photos/" + photoId
-        })
-    }
-    ,*/
+            method: "DELETE",
+            url: "/api/photos",
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            data: {
+                id: id
+            }
+        });
+    },
 
     findMatchedPets(form) {
         return $.ajax({
@@ -178,22 +175,22 @@ export default {
 
     //////////////////////// VALIDATION ///////////////////////////
 
-    checkUsernameExists(username){
+    checkUsernameExists(username) {
         return $.ajax({
-           method: "GET",
-           url: "/api/checkUsernameExists",
-           data: {
-               username: username
-           }
+            method: "GET",
+            url: "/api/checkUsernameExists",
+            data: {
+                username: username
+            }
         });
     },
-    checkEmailExists(email){
+    checkEmailExists(email) {
         return $.ajax({
-           method: "GET",
-           url: "/api/checkEmailExists",
-           data: {
-               email: email
-           }
+            method: "GET",
+            url: "/api/checkEmailExists",
+            data: {
+                email: email
+            }
         });
     }
 }
