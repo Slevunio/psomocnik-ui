@@ -2,8 +2,8 @@
     <div class="container" style="margin-top: 50px;">
         <h1 class="display-5 text-center text-dark">Nasze zwierzaki</h1>
         <br>
-        <div class="card-decks">
-            <div v-for="pet in pets" style="display: inline-block">
+        <div class="card-columns text-center">
+            <div v-for="pet in pets">
                 <pet-card route="petInfo" :petId="pet.id" :name="pet.name" :image="pet.photosUrls"></pet-card>
             </div>
         </div>
@@ -40,4 +40,5 @@
 </script>
 
 <style scoped>
+
 </style>

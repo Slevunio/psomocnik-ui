@@ -35,8 +35,12 @@ a {
   color: #6c757d;
 }
 
-.card-img, .card-img-top{
+/*.card-img, .card-img-top{
   width: 200px;
   height: 250px;
+}*/
+.card {
+  width: 250px;
+  height: 300px
 }
 </style>
