@@ -238,7 +238,11 @@ export default {
       this.pet.takeInDate = val;
     },
     deletePhoto(index) {
-      this.pet.photosUrls.splice(index, 1);
+      let urlSplitted = this.pet.photosUrls[index].split("/");
+      let photoId = urlSplitted[urlSplitted.length-1];      
+      api.deletePhoto(photoId).then(() => {
+        this.pet.photosUrls.splice(index, 1);      
+      })      
     },
     deleteAddedPhoto(index) {
       this.addedPhotos.splice(index, 1);
