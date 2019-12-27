@@ -36,7 +36,7 @@ a {
 }
 
 .card-img, .card-img-top{
-  width: 300px;
-  height: 400px;
+  width: 200px;
+  height: 250px;
 }
 </style>
