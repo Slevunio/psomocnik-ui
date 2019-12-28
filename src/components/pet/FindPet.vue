@@ -99,6 +99,7 @@
         },
         methods: {
             setFormToLocalStorage() {
+                this.form.activity === '>7' ? this.form.activity = 8 : this.form.activity = this.form.activity;
                 localStorage.setItem('form', JSON.stringify(this.form));
                 document.location.replace("/matchedPets");
             },
