@@ -9,6 +9,7 @@
             type="text"
             label="Nazwa użytkownika"
             name="username"
+            id="username"
             placeholder="Wprowadź nazwę użytkownika"
             v-model="username"
           ></input-text>
@@ -16,12 +17,13 @@
             type="password"
             label="Hasło"
             name="password"
+            id="password"
             placeholder="Wprowadź hasło"
             v-model="password"
           ></input-text>
           <p style="color:red;">{{error}}</p>
           <div class="col text-center">
-            <button type="button" class="btn-lg btn-primary" @click="login()">Zaloguj</button>
+            <button id="submit" type="button" class="btn-lg btn-primary" @click="login()">Zaloguj</button>
           </div>
         </form>
       </div>

@@ -6,7 +6,7 @@
     <input
       v-if=(!multiline)
       :type="type"
-      :id="name"
+      :id="id"
       :name="name"
       :placeholder="placeholder"
       :class="valid + ' form-control'"      
@@ -15,7 +15,7 @@
     <textarea
         v-else
         :type="type"
-        :id="name"
+        :id="id"
         :name="name"
         :placeholder="placeholder"
         :class="valid + ' form-control'"      
@@ -32,6 +32,7 @@ export default {
   props: [
     "type",
     "name",
+    "id",
     "label",
     "placeholder",
     "valid", // '' or 'is-valid' or 'is-invalid'

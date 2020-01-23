@@ -10,6 +10,7 @@
             <input-text
               type="text"
               name="username"
+              id="username"
               label="Nazwa użytkownika"
               placeholder="Wprowadź nazwę użytkownika"
               :valid="validation.username.valid"
@@ -20,6 +21,7 @@
             <input-text
               type="email"
               name="email"
+              id="email"
               label="Email"
               placeholder="Wprowadź adres email"
               @input="debounceEmail"
@@ -29,6 +31,7 @@
             ></input-text>
             <input-dropdown
               label="Rola użytkownika"
+              id="roles"
               :values="roles.roleNames"
               @input="setRole"
               :defaultValue="'USER'"
@@ -36,6 +39,7 @@
             <input-text
               type="password"
               name="password"
+              id="password"
               label="Hasło"
               placeholder="Wprowadź hasło"
               @input="debouncePassword"
@@ -46,6 +50,7 @@
             <input-text
               type="password"
               name="confirmPassword"
+              id="confirmPassword"
               label="Potwierdź hasło"
               placeholder="Wprowadź ponownie hasło"
               v-model="confirmPasswordBuffer"
@@ -179,16 +184,19 @@ export default {
       this.setConfirmPassword();
     }, 500),
     validateForm(user) {
-      for(let i = 0; i < this.validationFunctions.length; i++){
+      for (let i = 0; i < this.validationFunctions.length; i++) {
         this.validationFunctions[i](user);
       }
-      for(let field in this.validation){
-        if(this.validation[field].valid === 'is-invalid' || this.validation[field].valid === ''){          
+      for (let field in this.validation) {
+        if (
+          this.validation[field].valid === "is-invalid" ||
+          this.validation[field].valid === ""
+        ) {
           this.isSubmitButtonDisabled = true;
           return;
         }
       }
-      this.isSubmitButtonDisabled = false;     
+      this.isSubmitButtonDisabled = false;
     },
 
     validateUsername(user) {

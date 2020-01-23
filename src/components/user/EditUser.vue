@@ -8,9 +8,10 @@
           <thead>
             <tr>
               <th>Nazwa użytkownika</th>
-              <td id="username">
+              <td>
                 <input-text
                   v-model="usernameBuffer"
+                  id="username"
                   :defaultVal="user.username"
                   :valid="validation.username.valid"
                   :error="validation.username.error"
@@ -20,9 +21,10 @@
             </tr>
             <tr>
               <th>Adres email</th>
-              <td id="email">
+              <td>
                 <input-text
                   type="email"
+                  id="email"
                   :defaultVal="user.email"
                   @input="debounceEmail"
                   v-model="emailBuffer"
@@ -33,9 +35,10 @@
             </tr>
             <tr>
               <th>Rola</th>
-              <td id="role">
+              <td>
                 <input-dropdown
                   name="role"
+                  id="roles"
                   placeholder="Rola"
                   :values="rolesNames"
                   v-model="userRoleName"
