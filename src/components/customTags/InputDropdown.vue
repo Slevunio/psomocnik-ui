@@ -18,14 +18,12 @@
             'values',
             'defaultVal'
         ],
-
         data() {
             return {
                 valid: '',
                 choosedVal: ''
             }
         },
-
         computed:{
             choosed:{
                 get(){
@@ -36,7 +34,6 @@
                 }
             }
         },
-
         watch: {
             choosedVal(val) {
                 this.$emit('input', val);

@@ -78,7 +78,6 @@ import api from "../backend-api";
 import InputText from "../customTags/InputText";
 import InputDropdown from "../customTags/InputDropdown";
 import _ from "lodash";
-
 export default {
   name: "AddUser",
   components: {
@@ -130,11 +129,9 @@ export default {
       ]
     };
   },
-
   mounted() {
     this.readRoles();
   },
-
   methods: {
     readRoles() {
       api.readRoles().then(response => {
@@ -198,7 +195,6 @@ export default {
       }
       this.isSubmitButtonDisabled = false;
     },
-
     validateUsername(user) {
       if (user.username.length !== 0) {
         if (user.username.length >= 3) {
@@ -224,7 +220,6 @@ export default {
         return false;
       }
     },
-
     validateEmail(user) {
       if (user.email.length !== 0) {
         if (this.emailRegex.test(user.email)) {
@@ -248,7 +243,6 @@ export default {
         return false;
       }
     },
-
     validatePassword(user) {
       if (user.password.length !== 0) {
         if (user.password.length < 8) {
@@ -265,7 +259,6 @@ export default {
         return false;
       }
     },
-
     validateConfirmPassword(user) {
       if (user.confirmPassword.length !== 0) {
         if (user.confirmPassword !== this.user.password) {

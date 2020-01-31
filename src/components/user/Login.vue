@@ -34,10 +34,8 @@
 <script>
 import InputText from "../customTags/InputText";
 import axios from "axios";
-
 import api from "../backend-api";
 import jwt_decode from "jwt-decode";
-
 export default {
   name: "Login",
   components: {

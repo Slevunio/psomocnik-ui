@@ -84,7 +84,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import api from "../backend-api";
 import InputText from "../customTags/InputText";
@@ -108,7 +107,6 @@ export default {
       roles: [],
       rolesNames: [],
       userRoleName: "",
-
       validation: {
         username: {
           valid: "",
@@ -119,11 +117,9 @@ export default {
           error: ""
         }
       },
-
       emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       usernameBuffer: "", //for debounce purposes
       emailBuffer: "", //for debounce purposes
-
       isSubmitButtonDisabled: true,
       validationFunctions: [this.validateUsername, this.validateEmail]
     };
@@ -154,7 +150,6 @@ export default {
         this.userRoleName = this.oldUser.role.name;
       });
     },
-
     editUser() {
       this.user.role = this.roles.filter(role => {
         return role.name === this.userRoleName;
@@ -163,7 +158,6 @@ export default {
         document.location.replace("/manageUsers");
       });
     },
-
     setUsername() {
       this.user.username = this.usernameBuffer;
     },
@@ -191,7 +185,6 @@ export default {
       }
       this.isSubmitButtonDisabled = false;
     },
-
     validateUsername(user) {
       if (user.username.length !== 0) {
         if (user.username === this.oldUser.username) {
@@ -221,7 +214,6 @@ export default {
         return false;
       }
     },
-
     validateEmail(user) {
       if (user.email.length !== 0) {
         if (user.email === this.oldUser.email) {
@@ -260,7 +252,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 thead th {
   font-size: 18px;

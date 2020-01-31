@@ -91,7 +91,6 @@
 
 <script>
 import api from "../backend-api";
-
 export default {
   name: "ManageUsers",
   data() {
@@ -111,7 +110,6 @@ export default {
         this.users = response;
       });
     },
-
     checkAll() {
       $("input[name='userCheckbox']").prop(
         "checked",
@@ -122,7 +120,6 @@ export default {
         item.dispatchEvent(new Event("change"));
       });
     },
-
     deleteUsers() {
       api.deleteUsers(this.checkedUsers).then(response => {
         document.location.replace("/manageUsers");
