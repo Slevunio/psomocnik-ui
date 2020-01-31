@@ -2,7 +2,7 @@
     <div>
         <h5 class="display-6 text-secondary">{{label}}</h5>        
         <div class="form-group">
-            <select :class="valid+' form-control'" style="appearance: none;" v-model="choosed">
+            <select :id="id" :class="valid+' form-control'" style="appearance: none;" v-model="choosed">
                 <option v-for="value in values">{{value}}</option>
             </select>
         </div>
@@ -13,18 +13,17 @@
     export default {
         name: "InputDropdown",
         props: [
+            'id',
             'label',
             'values',
             'defaultVal'
         ],
-
         data() {
             return {
                 valid: '',
                 choosedVal: ''
             }
         },
-
         computed:{
             choosed:{
                 get(){
@@ -35,7 +34,6 @@
                 }
             }
         },
-
         watch: {
             choosedVal(val) {
                 this.$emit('input', val);
